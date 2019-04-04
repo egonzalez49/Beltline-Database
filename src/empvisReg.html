@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Employee Visitor Registration</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>First Name</label></div>
+                <input type="text" class="form-control" placeholder="First Name" required>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>Last Name</label></div>
+                  <input type="text" class="form-control" placeholder="Last Name" required>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Username</label></div>
+                <input type="text" class="form-control" placeholder="Username" required>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>User Type</label></div>
+                  <select class="form-control">
+                    <option>Manager</option>
+                    <option>Staff</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Password</label></div>
+                <input type="password" class="form-control" placeholder="Password" required>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>Confirm Password</label></div>
+                  <input type="password" class="form-control" placeholder="Password" required>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Phone</label></div>
+                <input type="text" class="form-control" placeholder="Phone" maxlength="9" required>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>Address</label></div>
+                  <input type="text" class="form-control" placeholder="Address" required>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>City</label></div>
+                <input type="text" class="form-control" placeholder="City" required>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>State</label></div>
+                  <select class="form-control">
+                  	<option value="AL">AL</option>
+                  	<option value="AK">AK</option>
+                  	<option value="AR">AR</option>
+                  	<option value="AZ">AZ</option>
+                  	<option value="CA">CA</option>
+                  	<option value="CO">CO</option>
+                  	<option value="CT">CT</option>
+                  	<option value="DC">DC</option>
+                  	<option value="DE">DE</option>
+                  	<option value="FL">FL</option>
+                  	<option value="GA">GA</option>
+                  	<option value="HI">HI</option>
+                  	<option value="IA">IA</option>
+                  	<option value="ID">ID</option>
+                  	<option value="IL">IL</option>
+                  	<option value="IN">IN</option>
+                  	<option value="KS">KS</option>
+                  	<option value="KY">KY</option>
+                  	<option value="LA">LA</option>
+                  	<option value="MA">MA</option>
+                  	<option value="MD">MD</option>
+                  	<option value="ME">ME</option>
+                  	<option value="MI">MI</option>
+                  	<option value="MN">MN</option>
+                  	<option value="MO">MO</option>
+                  	<option value="MS">MS</option>
+                  	<option value="MT">MT</option>
+                  	<option value="NC">NC</option>
+                  	<option value="NE">NE</option>
+                  	<option value="NH">NH</option>
+                  	<option value="NJ">NJ</option>
+                  	<option value="NM">NM</option>
+                  	<option value="NV">NV</option>
+                  	<option value="NY">NY</option>
+                  	<option value="ND">ND</option>
+                  	<option value="OH">OH</option>
+                  	<option value="OK">OK</option>
+                  	<option value="OR">OR</option>
+                  	<option value="PA">PA</option>
+                  	<option value="RI">RI</option>
+                  	<option value="SC">SC</option>
+                  	<option value="SD">SD</option>
+                  	<option value="TN">TN</option>
+                  	<option value="TX">TX</option>
+                  	<option value="UT">UT</option>
+                  	<option value="VT">VT</option>
+                  	<option value="VA">VA</option>
+                  	<option value="WA">WA</option>
+                  	<option value="WI">WI</option>
+                  	<option value="WV">WV</option>
+                  	<option value="WY">WY</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>Zipcode</label></div>
+                  <input type="text" class="form-control" placeholder="Zipcode" maxlength="5" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="center-text"><label>Email(s)</label></div>
+              <input type="email" class="form-control" placeholder="Email" multiple required>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
+                <button id="registerBtn" type="submit" class="btn btn-form btn-primary">Register</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="userReg.js"></script>
+  </body>
+</html>
