@@ -15,31 +15,89 @@ const ipc = require('electron').ipcRenderer;
 const mysql = require('mysql');
 var bcrypt = require('bcryptjs');
 
-//for hashing, does some shit I think
+const options = {
+    buttons: ['Ok'],
+    defaultId: 2,
+    title: 'Success',
+    message: 'Added!',
+    detail: 'Successfully created account.',
+  };
+
+//for hashing, does some stuff I think
 //maybe like how many times to pass through a blender
 const saltRounds = 10;
 
+function validateData() {
+  if (firstName.value === "" || lastName.value === "") {
+    dialog.showErrorBox('Incorrect data.', 'Make sure the name fields are filled in.');
+    return true;
+  } else if (userName.value === ""){
+    dialog.showErrorBox('Incorrect data.', 'Make sure the username field is filled in.');
+    return true;
+  } else if (password.value === "" || confirmPass.value === ""){
+    dialog.showErrorBox('Incorrect data.', 'Make sure the password fields is filled in.');
+    return true;
+  } else if (password.value.length < 8){
+    dialog.showErrorBox('Incorrect data.', 'Make sure your password is at least 8 characters.');
+    return true;
+  } else if (email.value === ""){
+    dialog.showErrorBox('Incorrect data.', 'Make sure the email field is filled in.');
+    return true;
+  }
+}
+
+function validateEmail(mail)
+{
+ if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(mail))
+  {
+    return true;
+  }
+    dialog.showErrorBox('Incorrect data.', 'Make sure all your emails are valid.');
+    return false;
+}
+
 registerBtn.addEventListener('click', function() {
+  if (validateData()) {
+    return;
+  }
   const fname = firstName.value;
   const lname = lastName.value;
   const password = pass.value;
   const confirm = confirmPass.value;
+  const userN = userName.value;
+  var error = false;
   if (!(password === confirm)) {
     dialog.showErrorBox('Incorrect login data.', 'Make sure your passwords are the same.')
   }
   var salt = bcrypt.genSaltSync(10);
   var hash = bcrypt.hashSync(password, salt);
-  console.log(hash);
+  hash = hash;
+  //console.log(hash);
   const emails = email.value;
   var emailList = emails.split(',');
+  var correctEmail = false;
   emailList.forEach(function (e) {
-    e = e.trim();
-    //console.log(e);
+    e = '' + e.trim();
+    if (!validateEmail(e)) {
+      correctEmail = true;
+    }
+    console.log(e);
   });
+  if (correctEmail) {
+    return;
+  }
+
+  insertUser(function (error) {
+    if (!error) {
+      dialog.showMessageBox(null, options, (response) => {
+        console.log(response);
+      });
+    }
+  }, userN, fname, lname, hash, emailList);
 
 })
 
-function insertUser(callback) {
+function insertUser(callback, userN, fname, lname, hash, emailList, error) {
 
   // Add the credentials to access your database
   const connection = mysql.createConnection({
@@ -58,25 +116,94 @@ function insertUser(callback) {
           console.log(err.fatal);
       }
   });
+  var values = [];
+  emailList.forEach(function (e) {
+    values.push([''+userN, e]);
+  });
 
   // Perform a query
-  $query = 'SELECT `*` FROM `user` INNER JOIN `email` ON user.USERNAME = email.USERNAME';
-
-  connection.query($query, function(err, rows, fields) {
+  $queryUser = 'INSERT INTO `user` (USERNAME, FNAME, LNAME, STATUS, PASSWORD, USERTYPE) VALUES ("'+userN+'", "'+fname+'", "'+lname+'", "'+'p'+'", "'+hash+'", "'+'v'+'")';
+  connection.query($queryUser, function(err, result) {
       if(err){
-          console.log("An error occurred performing the query.");
-          console.log(err);
-          return;
+        if (err.code === 'ER_DUP_ENTRY') {
+          dialog.showErrorBox('Duplicate username.', 'Make sure username is unique.')
+          error = true;
+        }
+        ipc.send("error-log", err);
+        console.log("An error occurred performing the query.");
+        console.log(err);
+        connection.end(function(){
+            // The connection has been closed
+        });
+        return;
       }
-      console.log("Query succesfully executed", rows);
 
-      callback(rows);
+      $query = 'INSERT INTO `email` (USERNAME, EMAIL) VALUES ?';
+      connection.query($query, [values], function(err, result) {
+          if(err){
+            if (err.code === 'ER_DUP_ENTRY') {
+               dialog.showErrorBox('Duplicate email.', 'Make sure email is unique.')
+               error = true;
+
+               $query3 = 'DELETE FROM `user` WHERE USERNAME = "'+userN+'"';
+               connection.query($query3, function(err, result) {
+                   if(err){
+                     ipc.send("error-log", err);
+                     console.log("An error occurred performing the query.");
+                     console.log(err);
+                     return;
+                   }
+
+                   callback(error);
+               });
+            }
+
+            console.log("An error occurred performing the query.");
+            console.log(err);
+            connection.end(function(){
+                // The connection has been closed
+            });
+
+            callback(error);
+            return;
+          }
+
+          callback(error);
+      });
+
+      $query2 = 'INSERT INTO `visitor` (USERNAME) VALUES ("'+userN+'")';
+      connection.query($query2, function(err, result) {
+          if(err){
+            // if (err.code === 'ER_DUP_ENTRY') {
+            //   dialog.showErrorBox('Duplicate email.', 'Make sure email is unique.')
+            //   error = true;
+            // }
+            ipc.send("error-log", err);
+            console.log("An error occurred performing the query.");
+            console.log(err);
+            connection.end(function(){
+                // The connection has been closed
+            });
+            return;
+          }
+
+          connection.end(function(){
+              // The connection has been closed
+          });
+      });
   });
 
-  // Close the connection
-  connection.end(function(){
-      // The connection has been closed
-  });
+  // $query = 'INSERT INTO `email` (USERNAME, EMAIL) VALUES ?';
+  // connection.query($query, [values], function(err, result) {
+  //     if(err){
+  //         console.log("An error occurred performing the query.");
+  //         console.log(err);
+  //         return;
+  //     }
+  //     console.log("Query succesfully executed", rows);
+  // });
+  //console.log("Test2");
+
 
   return;
 }

@@ -91,6 +91,10 @@ ipc.on('load-page', (event, arg, width, height) => {
     win.webContents.openDevTools()
 });
 
+ipc.on('error-log', (event, error) => {
+    console.log(error);
+});
+
 /*ipc.on('update-notify-value', function(event, arg) {
   win.webContents.send('targetPriceVal', arg)
 })*/

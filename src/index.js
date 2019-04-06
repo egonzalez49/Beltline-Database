@@ -10,16 +10,26 @@ const pass = document.getElementById('password')
 //const axios = require('axios')
 const ipc = require('electron').ipcRenderer;
 const mysql = require('mysql');
+var bcrypt = require('bcryptjs');
+
+//for hashing, does some stuff I think
+//maybe like how many times to pass through a blender
+const saltRounds = 10;
 
 loginBtn.addEventListener('click', function (event) {
   var modalPath;
+
+  //booleans for error messages
   var incorrectInfo = false;
   var unapproved = false;
   var approved = false;
+
+  //getUserName calls the SQL database
   getUserName(function (rows) {
     rows.forEach(function (row) {
       if (row.EMAIL === email.value) {
-        if (row.PASSWORD === pass.value) {
+        if (bcrypt.compareSync(pass.value, row.PASSWORD)) {
+        //if (row.PASSWORD === pass.value) {
           if(row.STATUS === "a") {
             if (row.USERTYPE === 'u') {
               approved = true;
@@ -75,20 +85,19 @@ loginBtn.addEventListener('click', function (event) {
           }
         }
       }
-    }
-  );
+    });
 
-  if (!unapproved) {
-    incorrectInfo = true;
-  }
-  //console.log(unapproved);
-  if (incorrectInfo && !approved) {
-    dialog.showErrorBox('Incorrect login data.', 'Make sure your email or password is correct.')
-  } else if (unapproved && !approved) {
-    dialog.showErrorBox('Account not approved.', 'Account needs to be approved first.')
-  }
+    if (!unapproved) {
+      incorrectInfo = true;
+    }
+    //console.log(unapproved);
+    if (incorrectInfo && !approved) {
+      dialog.showErrorBox('Incorrect login data.', 'Make sure your email or password is correct.')
+    } else if (unapproved && !approved) {
+      dialog.showErrorBox('Account not approved.', 'Account needs to be approved first.')
+    }
   //console.log(incorrectInfo);
-  });
+  }, email.value);
 })
 
 registerBtn.addEventListener('click', function (event) {
@@ -102,7 +111,7 @@ registerBtn.addEventListener('click', function (event) {
   win.show()*/
 })
 
-function getUserName(callback) {
+function getUserName(callback, email1) {
 
   // Add the credentials to access your database
   const connection = mysql.createConnection({
@@ -123,7 +132,9 @@ function getUserName(callback) {
   });
 
   // Perform a query
-  $query = 'SELECT `*` FROM `user` INNER JOIN `email` ON user.USERNAME = email.USERNAME';
+  $query = 'SELECT `*` FROM `user` INNER JOIN `email` ON user.USERNAME = email.USERNAME WHERE email.EMAIL = "'+email1+'"';
+  //console.log($query);
+  //console.log(email1);
 
   connection.query($query, function(err, rows, fields) {
       if(err){
