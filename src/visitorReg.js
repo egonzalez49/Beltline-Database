@@ -34,10 +34,10 @@ function validateData() {
   } else if (userName.value === ""){
     dialog.showErrorBox('Incorrect data.', 'Make sure the username field is filled in.');
     return true;
-  } else if (password.value === "" || confirmPass.value === ""){
+  } else if (pass.value === "" || confirmPass.value === ""){
     dialog.showErrorBox('Incorrect data.', 'Make sure the password fields is filled in.');
     return true;
-  } else if (password.value.length < 8){
+  } else if (pass.value.length < 8){
     dialog.showErrorBox('Incorrect data.', 'Make sure your password is at least 8 characters.');
     return true;
   } else if (email.value === ""){
