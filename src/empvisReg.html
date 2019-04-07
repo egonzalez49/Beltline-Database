@@ -17,26 +17,26 @@
             <div class="flex-container">
               <div class="form-group">
                 <div class="center-text"><label>First Name</label></div>
-                <input type="text" class="form-control" placeholder="First Name" required>
+                <input id="fname" type="text" class="form-control" placeholder="First Name" required>
               </div>
               <div class="form-group">
                 <div class="pad">
                   <div class="center-text"><label>Last Name</label></div>
-                  <input type="text" class="form-control" placeholder="Last Name" required>
+                  <input id="lname" type="text" class="form-control" placeholder="Last Name" required>
                 </div>
               </div>
             </div>
             <div class="flex-container">
               <div class="form-group">
                 <div class="center-text"><label>Username</label></div>
-                <input type="text" class="form-control" placeholder="Username" required>
+                <input id="username" type="text" class="form-control" placeholder="Username" required>
               </div>
               <div class="form-group">
                 <div class="pad">
                   <div class="center-text"><label>User Type</label></div>
-                  <select class="form-control">
-                    <option>Manager</option>
-                    <option>Staff</option>
+                  <select id="dropdown" class="form-control">
+                    <option value="m">Manager</option>
+                    <option value="s">Staff</option>
                   </select>
                 </div>
               </div>
@@ -44,36 +44,36 @@
             <div class="flex-container">
               <div class="form-group">
                 <div class="center-text"><label>Password</label></div>
-                <input type="password" class="form-control" placeholder="Password" required>
+                <input id="password" type="password" class="form-control" placeholder="Password" required>
               </div>
               <div class="form-group">
                 <div class="pad">
                   <div class="center-text"><label>Confirm Password</label></div>
-                  <input type="password" class="form-control" placeholder="Password" required>
+                  <input id="confirm" type="password" class="form-control" placeholder="Password" required>
                 </div>
               </div>
             </div>
             <div class="flex-container">
               <div class="form-group">
                 <div class="center-text"><label>Phone</label></div>
-                <input type="text" class="form-control" placeholder="Phone" maxlength="9" required>
+                <input id="phone" type="text" class="form-control" placeholder="Phone" maxlength="10" required>
               </div>
               <div class="form-group">
                 <div class="pad">
                   <div class="center-text"><label>Address</label></div>
-                  <input type="text" class="form-control" placeholder="Address" required>
+                  <input id="addr" type="text" class="form-control" placeholder="Address" required>
                 </div>
               </div>
             </div>
             <div class="flex-container">
               <div class="form-group">
                 <div class="center-text"><label>City</label></div>
-                <input type="text" class="form-control" placeholder="City" required>
+                <input id="city" type="text" class="form-control" placeholder="City" required>
               </div>
               <div class="form-group">
                 <div class="pad">
                   <div class="center-text"><label>State</label></div>
-                  <select class="form-control">
+                  <select id="state" class="form-control">
                   	<option value="AL">AL</option>
                   	<option value="AK">AK</option>
                   	<option value="AR">AR</option>
@@ -132,13 +132,13 @@
               <div class="form-group">
                 <div class="pad">
                   <div class="center-text"><label>Zipcode</label></div>
-                  <input type="text" class="form-control" placeholder="Zipcode" maxlength="5" required>
+                  <input id="zip" type="text" class="form-control" placeholder="Zipcode" maxlength="5" required>
                 </div>
               </div>
             </div>
             <div class="form-group">
               <div class="center-text"><label>Email(s)</label></div>
-              <input type="email" class="form-control" placeholder="Email" multiple required>
+              <input id="email" type="email" class="form-control" placeholder="Email" multiple required>
             </div>
             <div class="form-actions">
               <div class="center-button">
@@ -151,6 +151,6 @@
       </div>
     </div>
 
-    <script src="userReg.js"></script>
+    <script src="empvisReg.js"></script>
   </body>
 </html>

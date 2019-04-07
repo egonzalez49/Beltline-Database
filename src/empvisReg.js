@@ -159,7 +159,7 @@ const options = {
     });
 
     // Perform a query
-    $queryUser = 'INSERT INTO `user` (USERNAME, FNAME, LNAME, STATUS, PASSWORD, USERTYPE) VALUES ("'+userN+'", "'+fname+'", "'+lname+'", "'+'p'+'", "'+hash+'", "'+type+'")';
+    $queryUser = 'INSERT INTO `user` (USERNAME, FNAME, LNAME, STATUS, PASSWORD, USERTYPE) VALUES ("'+userN+'", "'+fname+'", "'+lname+'", "'+'p'+'", "'+hash+'", "'+type+'v'+'")';
     connection.query($queryUser, function(err, result) {
         if(err){
           if (err.code === 'ER_DUP_ENTRY') {
@@ -192,7 +192,7 @@ const options = {
                        return;
                      }
 
-                     callback(error);
+                     //callback(error);
                  });
               }
 
@@ -210,6 +210,27 @@ const options = {
             //     // The connection has been closed
             // });
             //callback(error);
+        });
+
+        $query2 = 'INSERT INTO `visitor` (USERNAME) VALUES ("'+userN+'")';
+        connection.query($query2, function(err, result) {
+            if(err){
+              // if (err.code === 'ER_DUP_ENTRY') {
+              //   dialog.showErrorBox('Duplicate email.', 'Make sure email is unique.')
+              //   error = true;
+              // }
+              ipc.send("error-log", err);
+              console.log("An error occurred performing the query.");
+              console.log(err);
+              connection.end(function(){
+                  // The connection has been closed
+              });
+              return;
+            }
+
+            // connection.end(function(){
+            //     // The connection has been closed
+            // });
         });
 
         $queryEmp = 'INSERT INTO `employee` (USERNAME, PHONE, STREET, CITY, STATE, ZIP, TYPE) VALUES ("'+userN+'", "'+pnum+'", "'+addy+'", "'+city1+'", "'+state1+'", "'+Number(zipcode1)+'", "'+type+'")';
@@ -230,7 +251,7 @@ const options = {
                        return;
                      }
 
-                     callback(error);
+                     //callback(error);
                  });
               }
 
@@ -255,7 +276,8 @@ const options = {
     return;
   }
 
-backBtn.addEventListener('click', function() {
-  ipc.send("load-page", 'file://' + __dirname + '/add.html', 500, 425);
-  remote.getCurrentWindow().close();
-})
+
+  backBtn.addEventListener('click', function() {
+    ipc.send("load-page", 'file://' + __dirname + '/add.html', 500, 425);
+    remote.getCurrentWindow().close();
+  })

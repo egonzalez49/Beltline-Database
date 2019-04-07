@@ -142,6 +142,7 @@ function insertUser(callback, userN, fname, lname, hash, emailList, error) {
       $query = 'INSERT INTO `email` (USERNAME, EMAIL) VALUES ?';
       connection.query($query, [values], function(err, result) {
           if(err){
+            error = true;
             if (err.code === 'ER_DUP_ENTRY') {
                dialog.showErrorBox('Duplicate email.', 'Make sure email is unique.')
                error = true;
