@@ -26,6 +26,7 @@ loginBtn.addEventListener('click', function (event) {
 
   //getUserName calls the SQL database
   getUserName(function (rows) {
+    ipc.send("error-log", rows);
     rows.forEach(function (row) {
       if (row.EMAIL === email.value) {
         if (bcrypt.compareSync(pass.value, row.PASSWORD)) {
