@@ -19,7 +19,7 @@
                 <div class="center-text"><label>Contain Site</label></div>
                 <select id="dropdown" class="form-control">
                   <option value="All">All</option>
-                  <option value="Other">Other</option>
+                  <!--<option value="Other">Other</option>-->
                 </select>
               </div>
               <div class="pad">
@@ -30,7 +30,7 @@
                     <option value="Bike">Bike</option>
                     <option value="Bus">Bus</option>
                     <option value="Marta">MARTA</option>
-                    <option value="Other">Other</option>
+                    <!--<option value="Other">Other</option>-->
                   </select>
                 </div>
               </div>
@@ -51,9 +51,9 @@
                   <thead>
                     <tr>
                       <th>Route</th>
-                      <th>Transport Type</th>
-                      <th>Price</th>
-                      <th>Sites Connected</th>
+                      <th>Transport Type <span id="sortTT" onclick="sorting(1)" class="icon icon-up-dir"></span></th>
+                      <th>Price <span id="sortP" onclick="sorting(2)" class="icon icon-up-dir"></span></th>
+                      <th>Sites Connected <span id="sortSC" onclick="sorting(3)" class="icon icon-up-dir"></span></th>
                     </tr>
                   </thead>
                   <tbody id="tBody">
@@ -101,7 +101,7 @@
               <div class="center-button">
                 <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
                 <div class="center-text"><label>Transit Date</label></div>
-                <div class="size"><input type="date" class="form-control" placeholder=""></div>
+                <div class="size"><input id="logDate" type="date" class="form-control" placeholder=""></div>
                 <div class="pad"><button id="logBtn" type="submit" class="btn btn-form btn-primary">Log Transit</button></div>
               </div>
             </div>

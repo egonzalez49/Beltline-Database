@@ -35,49 +35,49 @@ loginBtn.addEventListener('click', function (event) {
             if (row.USERTYPE === 'u') {
               approved = true;
               modalPath = path.join('file://', __dirname, 'userFunc.html');
-              ipc.send("load-page", modalPath, 500, 425);
+              ipc.send("load-page-user", modalPath, 500, 425, row.USERNAME, row.USERTYPE);
               remote.getCurrentWindow().close();
               return;
             } else if (row.USERTYPE === 'v') {
               approved = true;
               modalPath = path.join('file://', __dirname, 'visitorFunc.html');
-              ipc.send("load-page", modalPath, 500, 425);
+              ipc.send("load-page-user", modalPath, 500, 425, row.USERNAME, row.USERTYPE);
               remote.getCurrentWindow().close();
               return;
             } else if (row.USERTYPE === 'a') {
               approved = true;
               modalPath = path.join('file://', __dirname, 'adminFunc.html');
-              ipc.send("load-page", modalPath, 500, 425);
+              ipc.send("load-page-user", modalPath, 500, 425, row.USERNAME, row.USERTYPE);
               remote.getCurrentWindow().close();
               return;
             } else if (row.USERTYPE === 'av') {
               approved = true;
               modalPath = path.join('file://', __dirname, 'adminvisFunc.html');
-              ipc.send("load-page", modalPath, 500, 425);
+              ipc.send("load-page-user", modalPath, 500, 425, row.USERNAME, row.USERTYPE);
               remote.getCurrentWindow().close();
               return;
             } else if (row.USERTYPE === 'm') {
               approved = true;
               modalPath = path.join('file://', __dirname, 'managerFunc.html');
-              ipc.send("load-page", modalPath, 500, 425);
+              ipc.send("load-page-user", modalPath, 500, 425, row.USERNAME, row.USERTYPE);
               remote.getCurrentWindow().close();
               return;
             } else if (row.USERTYPE === 'mv') {
               approved = true;
               modalPath = path.join('file://', __dirname, 'managervisFunc.html');
-              ipc.send("load-page", modalPath, 500, 425);
+              ipc.send("load-page-user", modalPath, 500, 425, row.USERNAME, row.USERTYPE);
               remote.getCurrentWindow().close();
               return;
             } else if (row.USERTYPE === 's') {
               approved = true;
               modalPath = path.join('file://', __dirname, 'staffFunc.html');
-              ipc.send("load-page", modalPath, 500, 425);
+              ipc.send("load-page-user", modalPath, 500, 425, row.USERNAME, row.USERTYPE);
               remote.getCurrentWindow().close();
               return;
             } else if (row.USERTYPE === 'sv') {
               approved = true;
               modalPath = path.join('file://', __dirname, 'staffvisFunc.html');
-              ipc.send("load-page", modalPath, 500, 425);
+              ipc.send("load-page-user", modalPath, 500, 425, row.USERNAME, row.USERTYPE);
               remote.getCurrentWindow().close();
               return;
             }
