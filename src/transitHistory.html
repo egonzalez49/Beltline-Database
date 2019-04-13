@@ -17,49 +17,66 @@
             <div class="flex-container">
               <div class="form-group">
                 <div class="center-text"><label>Contain Site</label></div>
-                <select class="form-control">
+                <select id="dropdown" class="form-control">
                   <option value="All">All</option>
-                  <option value="Bike">Bike</option>
-                  <option value="Bus">Bus</option>
-                  <option value="Marta">MARTA</option>
-                  <option value="Other">Other</option>
+                  <!--<option value="Other">Other</option>-->
                 </select>
               </div>
               <div class="pad">
                 <div class="form-group">
                   <div class="center-text"><label>Transport Type</label></div>
-                  <select class="form-control">
+                  <select id="transportType" class="form-control">
                     <option value="All">All</option>
                     <option value="Bike">Bike</option>
                     <option value="Bus">Bus</option>
                     <option value="Marta">MARTA</option>
-                    <option value="Other">Other</option>
+                    <!--<option value="Other">Other</option>-->
                   </select>
+                </div>
+              </div>
+              <div class="pad">
+                <div class="form-group">
+                  <div class="center-text"><label>Route</label></div>
+                  <input id="routeName" type="text" class="form-control" placeholder="">
                 </div>
               </div>
             </div>
             <div class="flex-container">
               <div class="form-group">
-                <div class="center-text"><label>Price Range</label></div>
-                <div class="flex-container2">
-                  <div class="pad2"><input type="number" class="form-control" placeholder="" min="0"></div>
-                  <div class="pad"><input type="number" class="form-control" placeholder="" min="0"></div>
-                  <div class="pad"><button id="filterBtn" class="btn btn-form btn-primary">Filter</button></div>
+                <div class="center-text"><label>Start Date</label></div>
+                <input id="startDate" type="date" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>End Date</label></div>
+                  <input id="endDate" type="date" class="form-control" placeholder="">
                 </div>
               </div>
+              <div class="pad"><button id="filterBtn" class="btn btn-primary">Filter</button></div>
             </div>
+            <!--
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Price Range</label></div>
+                <div class="flex-container2">
+                  <div class="pad2"><input id="lowerPrice" type="number" class="form-control" placeholder="" min="0"></div>
+                  <div class="pad"><input id="higherPrice" type="number" class="form-control" placeholder="" min="0"></div>
+                  <div class="pad"><button id="filterBtn" class="btn btn-primary">Filter</button></div>
+                </div>
+              </div>
+            </div>-->
             <div class="flex-container">
               <div class="form-group">
                 <table class="table-striped">
                   <thead>
                     <tr>
-                      <th>Route</th>
-                      <th>Transport Type</th>
-                      <th>Price</th>
-                      <th>Sites Connected</th>
+                      <th>Date <span id="sortD" onclick="sorting(1)" class="icon icon-up-dir"></span></th>
+                      <th>Route <span id="sortR" onclick="sorting(2)" class="icon icon-up-dir"></span></th>
+                      <th>Transport Type <span id="sortTT" onclick="sorting(3)" class="icon icon-up-dir"></span></th>
+                      <th>Price <span id="sortP" onclick="sorting(4)" class="icon icon-up-dir"></span></th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody id="tBody">
                    <tr>
                      <td>&nbsp;</td>
                      <td>&nbsp;</td>
@@ -103,9 +120,6 @@
             <div class="form-actions">
               <div class="center-button">
                 <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
-                <div class="center-text"><label>Transit Date</label></div>
-                <div class="size"><input type="date" class="form-control" placeholder=""></div>
-                <div class="pad"><button id="logBtn" type="submit" class="btn btn-form btn-primary">Log Transit</button></div>
               </div>
             </div>
           </form>
@@ -113,6 +127,6 @@
       </div>
     </div>
 
-    <script src="userReg.js"></script>
+    <script src="transitHistory.js"></script>
   </body>
 </html>

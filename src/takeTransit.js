@@ -159,10 +159,12 @@ logBtn.addEventListener("click", function() {
   var type;
   var route;
   var date;
+  var checked = false;
   checkboxes = document.getElementsByTagName("input");
   for (var i = 2; i < checkboxes.length - 1; i++) {
     var checkbox = checkboxes[i];
     if(checkbox.checked) {
+      checked = true;
       //ipc.send("error-log", "SUCCESSFULLY FOUND CHECKED AT " + i);
       var row = table.childNodes[i-2];
       //ipc.send("error-log", "row length" + row.childNodes.length);
@@ -179,9 +181,18 @@ logBtn.addEventListener("click", function() {
     }
   }
 
+  if (!checked) {
+    dialog.showErrorBox('No transit selected.', 'Please select a transit.');
+    return true;
+  }
+
   //ipc.send("error-log", type + " " + route);
 
   date = logDate.value;
+  if (date === null || date === "") {
+    dialog.showErrorBox('No date selected.', 'Please select a date.');
+    return true;
+  }
 
   //ipc.send("error-log", "DATE: " + date);
 

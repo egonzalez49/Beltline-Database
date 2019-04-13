@@ -4,6 +4,7 @@ const BrowserWindow = electron.remote.BrowserWindow
 const { remote } = require('electron')
 const transitBtn = document.getElementById('transitBtn')
 const backBtn = document.getElementById('cancelBtn')
+const historyBtn = document.getElementById('transhistBtn')
 //const axios = require('axios')
 const ipc = require('electron').ipcRenderer;
 
