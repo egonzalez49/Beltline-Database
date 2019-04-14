@@ -159,7 +159,7 @@ const options = {
     });
 
     // Perform a query
-    $queryUser = 'INSERT INTO `user` (USERNAME, FNAME, LNAME, STATUS, PASSWORD, USERTYPE) VALUES ("'+userN+'", "'+fname+'", "'+lname+'", "'+'a'+'", "'+hash+'", "'+type+'")';
+    $queryUser = 'INSERT INTO `user` (USERNAME, FNAME, LNAME, STATUS, PASSWORD, USERTYPE) VALUES ("'+userN+'", "'+fname+'", "'+lname+'", "'+'p'+'", "'+hash+'", "'+type+'")';
     connection.query($queryUser, function(err, result) {
         if(err){
           if (err.code === 'ER_DUP_ENTRY') {

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Manage Profile</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>First Name</label></div>
+                <input id="fname" type="text" class="form-control" placeholder="First Name" required>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>Last Name</label></div>
+                  <input id="lname" type="text" class="form-control" placeholder="Last Name" required>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Username</label></div>
+                <p id="username">Test</p>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="form-group">
+                    <div class="center-text"><label>Site Name</label></div>
+                    <p id="siteName">Test</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="form-group">
+                  <div class="center-text"><label>Employee ID</label></div>
+                  <p id="employeeID">Test</p>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="pad">
+                  <div class="center-text"><label>Phone</label></div>
+                  <input id="phone" type="text" class="form-control" placeholder="Phone" maxlength="10" required>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Address</label></div>
+                <p id="address">Test</p>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="center-text"><label>Email(s)</label></div>
+              <input id="email" type="email" class="form-control" placeholder="Email" multiple required>
+            </div>
+            <div class="form-group">
+              <div class="checkbox">
+                <label>
+                  <input id="visitor" type="checkbox"> Visitor Account
+                </label>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
+                <button id="registerBtn" type="submit" class="btn btn-form btn-primary">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="manageProfile.js"></script>
+  </body>
+</html>

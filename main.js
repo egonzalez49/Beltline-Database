@@ -178,8 +178,13 @@ ipc.on('load-back-page', () => {
 });
 
 ipc.on('update-username-value', function(event) {
-    console.log("Sending username: " + currentUser.userName);
+    //console.log("Sending username: " + currentUser.userName);
   win.webContents.send('userName', currentUser.userName);
+})
+
+ipc.on('update-username-value-type', function(event) {
+    //console.log("Sending username: " + currentUser.userName);
+  win.webContents.send('userName', currentUser.userName, currentUser.type);
 })
 
 ipc.on('error-log', (event, error) => {
