@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Create Event</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Name</label></div>
+                <div class="flex-container">
+                  <input id="eventName" type="text" class="form-control" maxlength="50" placeholder="">
+                </div>
+              </div>
+              <div class="pad">
+                <div class="flex-container">
+                  <div class="form-group">
+                    <div class="center-text"><label>Capacity</label></div>
+                    <input id="capacity" type="number" class="form-control" min="0" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <div class="pad">
+                      <div class="center-text"><label>Price</label></div>
+                      <input id="price" type="number" class="form-control" placeholder="" min="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Minimum Staff</label></div>
+                <div class="flex-container">
+                  <input id="minStaff" type="number" class="form-control" min="0" placeholder="">
+                </div>
+              </div>
+              <div class="pad">
+                <div class="flex-container">
+                  <div class="form-group">
+                    <div class="center-text"><label>Start Date</label></div>
+                    <input id="startDate" type="date" class="form-control" placeholder="">
+                  </div>
+                  <div class="form-group">
+                    <div class="pad">
+                      <div class="center-text"><label>End Date</label></div>
+                      <input id="endDate" type="date" class="form-control" placeholder="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea id="desc" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Staff</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" class="btn btn-form btn-default">Back</button>
+                <button id="getBtn" class="btn btn-form btn-default">Get Staff</button>
+                <button id="createBtn" class="btn btn-form btn-default">Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="createEvent.js"></script>
+  </body>
+</html>

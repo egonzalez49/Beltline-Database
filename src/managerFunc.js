@@ -6,6 +6,7 @@ const transitBtn = document.getElementById('transitBtn')
 const backBtn = document.getElementById('cancelBtn')
 const historyBtn = document.getElementById('visithistBtn')
 const mngprofileBtn = document.getElementById('mngprofileBtn')
+const mngEventBtn = document.getElementById('mngeventBtn')
 //const axios = require('axios')
 const ipc = require('electron').ipcRenderer;
 
@@ -34,6 +35,17 @@ historyBtn.addEventListener('click', function (event) {
 mngprofileBtn.addEventListener('click', function (event) {
   const modalPath = path.join('file://', __dirname, 'manageProfile.html')
   ipc.send("load-page", modalPath, 550, 625);
+  remote.getCurrentWindow().close();
+  //ipc.send('load-page', 'file://' + __dirname + '/add.html');
+  /*let win = new BrowserWindow({ frame: true, width: 500, height: 375 })
+  win.on('close', function () { win = null })
+  win.loadURL(modalPath)
+  win.show()*/
+})
+
+mngEventBtn.addEventListener('click', function (event) {
+  const modalPath = path.join('file://', __dirname, 'manageEvent.html')
+  ipc.send("load-page", modalPath, 750, 850);
   remote.getCurrentWindow().close();
   //ipc.send('load-page', 'file://' + __dirname + '/add.html');
   /*let win = new BrowserWindow({ frame: true, width: 500, height: 375 })

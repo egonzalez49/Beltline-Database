@@ -9,6 +9,17 @@ var currentUser = new Object();
 currentUser.userName = null;
 currentUser.type = null;
 
+var currentSite = new Object();
+currentSite.name = null;
+
+var currentTransit = new Object();
+currentTransit.route = null;
+currentTransit.type = null;
+
+var currentEvent = new Object();
+currentEvent.startdate = null;
+currentEvent.name = null;
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
@@ -104,6 +115,56 @@ ipc.on('load-page-user', (event, arg, width, height, userName, type) => {
     win.loadURL(arg)
     win.show()
     win.webContents.openDevTools()
+});
+
+ipc.on('load-page-site', (event, arg, width, height, siteName) => {
+    //win.loadURL(arg);
+    currentSite.name = siteName;
+    win = new BrowserWindow({ frame: true, width: width, height: height })
+    win.setMenu(null)
+    //win.on('close', function () { win = null })
+    win.loadURL(arg)
+    win.show()
+    win.webContents.openDevTools()
+});
+
+ipc.on('update-site-value', function(event) {
+    //console.log("Sending username: " + currentUser.userName);
+  win.webContents.send('site', currentSite.name);
+});
+
+ipc.on('load-page-transit', (event, arg, width, height, routes, types) => {
+    //win.loadURL(arg);
+    currentTransit.route = routes;
+    currentTransit.type = types;
+    win = new BrowserWindow({ frame: true, width: width, height: height })
+    win.setMenu(null)
+    //win.on('close', function () { win = null })
+    win.loadURL(arg)
+    win.show()
+    win.webContents.openDevTools()
+});
+
+ipc.on('update-transit-value', function(event) {
+    //console.log("Sending username: " + currentUser.userName);
+  win.webContents.send('transit', currentTransit.route, currentTransit.type);
+});
+
+ipc.on('load-page-event', (event, arg, width, height, name, date) => {
+    //win.loadURL(arg);
+    currentEvent.name = name;
+    currentEvent.startdate = date;
+    win = new BrowserWindow({ frame: true, width: width, height: height })
+    win.setMenu(null)
+    //win.on('close', function () { win = null })
+    win.loadURL(arg)
+    win.show()
+    win.webContents.openDevTools()
+});
+
+ipc.on('update-event-value', function(event) {
+    //console.log("Sending username: " + currentUser.userName);
+  win.webContents.send('event', currentEvent.name, currentEvent.startdate, currentUser.userName);
 });
 
 ipc.on('load-page-logout', (event, arg, width, height) => {

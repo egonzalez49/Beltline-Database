@@ -154,6 +154,7 @@ var userName;
 
 ipc.on("userName", function(event, name) {
   userName = name;
+  console.log(userName);
 });
 
 window.addEventListener("load", function() {

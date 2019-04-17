@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Manage Event</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Name</label></div>
+                <div class="flex-container">
+                  <input id="eventName" type="text" class="form-control" maxlength="50" placeholder="">
+                </div>
+              </div>
+              <div class="pad">
+                <div class="form-group">
+                  <div class="center-text"><label>Description Keyword</label></div>
+                  <div class="flex-container">
+                    <input id="descWord" type="text" class="form-control" maxlength="50" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div clas="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Start Date</label></div>
+                <input id="startDate" type="date" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">
+                  <div class="center-text"><label>End Date</label></div>
+                  <input id="endDate" type="date" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Duration Range</label></div>
+                <div class="flex-container2">
+                  <div class="pad2"><input id="lowDuration" type="number" class="form-control" placeholder="" min="0"></div>
+                  <div class="pad"><input id="highDuration" type="number" class="form-control" placeholder="" min="0"></div>
+                </div>
+              </div>
+              <div class="pad">
+                <div class="form-group">
+                  <div class="center-text"><label>Total Visits Range</label></div>
+                  <div class="flex-container2">
+                    <div class="pad2"><input id="lowVisit" type="number" class="form-control" placeholder="" min="0"></div>
+                    <div class="pad"><input id="highVisit" type="number" class="form-control" placeholder="" min="0"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Total Revenue Range</label></div>
+                <div class="flex-container2">
+                  <div class="pad2"><input id="lowRevenue" type="number" class="form-control" placeholder="" min="0"></div>
+                  <div class="pad"><input id="highRevenue" type="number" class="form-control" placeholder="" min="0"></div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="pad"><button id="filterBtn" class="btn btn-primary">Filter</button></div>
+              <div class="pad"><button id="createBtn" class="btn btn-primary">Create</button></div>
+              <div class="pad"><button id="editBtn" class="btn btn-primary">View/Edit</button></div>
+              <div class="pad"><button id="deleteBtn" class="btn btn-primary">Delete</button></div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Name <span id="sortName" onclick="sorting(1)" class="icon icon-up-dir"></span></th>
+                      <th>Staff Count <span id="sortStaff" onclick="sorting(2)" class="icon icon-up-dir"></span></th>
+                      <th>Duration(days) <span id="sortDay" onclick="sorting(3)" class="icon icon-up-dir"></span></th>
+                      <th>Total Visits <span id="sortVisits" onclick="sorting(4)" class="icon icon-up-dir"></span></th>
+                      <th>Total Revenue($) <span id="sortRevenue" onclick="sorting(5)" class="icon icon-up-dir"></span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="manageEvent.js"></script>
+  </body>
+</html>

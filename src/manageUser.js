@@ -75,7 +75,7 @@ filterBtn.addEventListener("click", function() {
   if (type === 'All') {
     //transport = '';
   } else if (type === 'User'){
-    type = 'u';
+    type = 'All';
   } else if (type === 'Visitor'){
     type = 'v';
   } else if (type === 'Manager'){
@@ -186,6 +186,7 @@ approveBtn.addEventListener("click", function() {
     }
 
     if (!checked) {
+      event.preventDefault();
       dialog.showErrorBox('No user selected.', 'Please select a user.');
       return true;
     }
@@ -199,7 +200,7 @@ approveBtn.addEventListener("click", function() {
         });
       }
     }, user2Approve, approveStatus, error);
-    event.preventDefault();
+    //event.preventDefault();
 });
 
 declineBtn.addEventListener("click", function() {

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Create Transit</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Transport Type</label></div>
+                <select id="transportType" class="form-control">
+                  <option value="Bike">Bike</option>
+                  <option value="Bus">Bus</option>
+                  <option value="Marta">MARTA</option>
+                  <!--<option value="Other">Other</option>-->
+                </select>
+              </div>
+              <div class="pad">
+                <div class="flex-container">
+                  <div class="form-group">
+                    <div class="center-text"><label>Route</label></div>
+                    <input id="routeName" type="text" class="form-control" maxlength="20" placeholder="" required>
+                  </div>
+                  <div class="form-group">
+                    <div class="pad">
+                      <div class="center-text"><label>Price</label></div>
+                      <input id="price" type="number" class="form-control" placeholder="" min="0">
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Site</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" class="btn btn-form btn-default">Back</button>
+                <button id="createBtn" class="btn btn-form btn-default">Create</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="createTransit.js"></script>
+  </body>
+</html>

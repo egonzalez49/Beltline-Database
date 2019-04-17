@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Manage Site</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Site</label></div>
+                <select id="siteDropdown" class="form-control">
+                  <option value="All">All</option>
+                </select>
+              </div>
+              <div class="pad">
+                <div class="form-group">
+                  <div class="center-text"><label>Manager</label></div>
+                  <select id="managerDropdown" class="form-control">
+                    <option value="All">All</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Open Everyday</label></div>
+                <div class="flex-container">
+                  <select id="openEverydayDropdown" class="form-control">
+                    <option value="All">All</option>
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                  <div class="pad"><button id="filterBtn" class="btn btn-primary">Filter</button></div>
+                  <div class="pad"><button id="createBtn" class="btn btn-primary">Create</button></div>
+                  <div class="pad"><button id="editBtn" class="btn btn-primary">Edit</button></div>
+                  <div class="pad"><button id="deleteBtn" class="btn btn-primary">Delete</button></div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Name <span id="sortName" onclick="sorting(1)" class="icon icon-up-dir"></span></th>
+                      <th>Manager <span id="sortManager" onclick="sorting(2)" class="icon icon-up-dir"></span></th>
+                      <th>Open Everyday <span id="sortOpen" onclick="sorting(3)" class="icon icon-up-dir"></span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="manageSite.js"></script>
+  </body>
+</html>
