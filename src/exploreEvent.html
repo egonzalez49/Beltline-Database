@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Explore Event</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Name</label></div>
+                <div class="flex-container">
+                  <input id="eventName" type="text" class="form-control" maxlength="50" placeholder="">
+                </div>
+              </div>
+              <div class="pad">
+                <div class="form-group">
+                  <div class="center-text"><label>Description Keyword</label></div>
+                  <div class="flex-container">
+                    <input id="descWord" type="text" class="form-control" maxlength="50" placeholder="">
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Site Name</label></div>
+                <select id="dropdown" class="form-control">
+                  <option value="All">All</option>
+                </select>
+              </div>
+            </div>
+            <div clas="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Start Date</label></div>
+                <input id="startDate" type="date" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">
+                  <div class="center-text"><label>End Date</label></div>
+                  <input id="endDate" type="date" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Total Visits Range</label></div>
+                <div class="flex-container2">
+                  <div class="pad2"><input id="lowVisit" type="number" class="form-control" placeholder="" min="0"></div>
+                  <div class="pad"><input id="highVisit" type="number" class="form-control" placeholder="" min="0"></div>
+                </div>
+              </div>
+              <div class="pad">
+                <div class="form-group">
+                  <div class="center-text"><label>Ticket Price Range</label></div>
+                  <div class="flex-container2">
+                    <div class="pad2"><input id="lowPrice" type="number" class="form-control" placeholder="" min="0"></div>
+                    <div class="pad"><input id="highPrice" type="number" class="form-control" placeholder="" min="0"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="checkbox">
+                <label>
+                  <input id="visited" type="checkbox"> Include Visited
+                </label>
+              </div>
+              <div class="pad">
+                <label>
+                  <input id="sold" type="checkbox"> Include Sold Out
+                </label>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="pad"><button id="filterBtn" class="btn btn-primary">Filter</button></div>
+              <div class="pad"><button id="viewBtn" class="btn btn-primary">View</button></div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Event Name <span id="sortEvent" onclick="sorting(1)" class="icon icon-up-dir"></span></th>
+                      <th>Site Name <span id="sortSite" onclick="sorting(2)" class="icon icon-up-dir"></span></th>
+                      <th>Ticket Price <span id="sortPrice" onclick="sorting(3)" class="icon icon-up-dir"></span></th>
+                      <th>Ticket Remaining <span id="sortRemain" onclick="sorting(4)" class="icon icon-up-dir"></span></th>
+                      <th>Total Visits <span id="sortVisits" onclick="sorting(5)" class="icon icon-up-dir"></span></th>
+                      <th>My Visits <span id="sortMy" onclick="sorting(6)" class="icon icon-up-dir"></span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="exploreEvent.js"></script>
+  </body>
+</html>

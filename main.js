@@ -133,6 +133,75 @@ ipc.on('update-site-value', function(event) {
   win.webContents.send('site', currentSite.name);
 });
 
+var info = new Object();
+info.start = null;
+info.name = null;
+
+ipc.on('load-page-daily', (event, arg, width, height, siteName, startDate) => {
+    //win.loadURL(arg);
+    info.name = siteName;
+    info.start = startDate;
+    win = new BrowserWindow({ frame: true, width: width, height: height })
+    win.setMenu(null)
+    //win.on('close', function () { win = null })
+    win.loadURL(arg)
+    win.show()
+    win.webContents.openDevTools()
+});
+
+ipc.on('update-daily-value', function(event) {
+    //console.log("Sending username: " + currentUser.userName);
+  win.webContents.send('daily', info.name, info.start);
+});
+
+var e = new Object();
+e.start = null;
+e.name = null;
+e.site = null;
+
+ipc.on('load-page-dailyevent', (event, arg, width, height, p1, p2, p3) => {
+    //win.loadURL(arg);
+    e.name = p1;
+    e.site = p2;
+    e.start = p3;
+    win = new BrowserWindow({ frame: true, width: width, height: height })
+    win.setMenu(null)
+    //win.on('close', function () { win = null })
+    win.loadURL(arg)
+    win.show()
+    win.webContents.openDevTools()
+});
+
+ipc.on('update-dailyevent-value', function(event) {
+    //console.log("Sending username: " + currentUser.userName);
+  win.webContents.send('dailyevent', e.name, e.site, e.start);
+});
+
+var e2 = new Object();
+e2.start = null;
+e2.name = null;
+e2.site = null;
+e2.ticket = null;
+
+ipc.on('load-page-dailyevent2', (event, arg, width, height, p1, p2, p3, p4) => {
+    //win.loadURL(arg);
+    e.name = p1;
+    e.site = p2;
+    e.start = p3;
+    e.ticket = p4;
+    win = new BrowserWindow({ frame: true, width: width, height: height })
+    win.setMenu(null)
+    //win.on('close', function () { win = null })
+    win.loadURL(arg)
+    win.show()
+    win.webContents.openDevTools()
+});
+
+ipc.on('update-dailyevent2-value', function(event) {
+    //console.log("Sending username: " + currentUser.userName);
+  win.webContents.send('dailyevent2', e.name, e.site, e.start, e.ticket);
+});
+
 ipc.on('load-page-transit', (event, arg, width, height, routes, types) => {
     //win.loadURL(arg);
     currentTransit.route = routes;

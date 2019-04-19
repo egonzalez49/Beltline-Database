@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Site Report</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div clas="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Start Date</label></div>
+                <input id="startDate" type="date" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">
+                  <div class="center-text"><label>End Date</label></div>
+                  <input id="endDate" type="date" class="form-control" placeholder="">
+              </div>
+              </div>
+              <div class="flex-container">
+                <div class="form-group">
+                  <div class="center-text"><label>Event Count Range</label></div>
+                  <div class="flex-container2">
+                    <div class="pad2"><input id="lowEventCount" type="number" class="form-control" placeholder="" min="0"></div>
+                    <div class="pad"><input id="highEventCount" type="number" class="form-control" placeholder="" min="0"></div>
+                  </div>
+                </div>
+                <div class="pad">
+                  <div class="form-group">
+                    <div class="center-text"><label>Staff Count Range</label></div>
+                    <div class="flex-container2">
+                      <div class="pad2"><input id="lowStaffCount" type="number" class="form-control" placeholder="" min="0"></div>
+                      <div class="pad"><input id="highStaffCount" type="number" class="form-control" placeholder="" min="0"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="flex-container">
+                <div class="form-group">
+                  <div class="center-text"><label>Total Visits Range</label></div>
+                  <div class="flex-container2">
+                    <div class="pad2"><input id="lowVisitsRange" type="number" class="form-control" placeholder="" min="0"></div>
+                    <div class="pad"><input id="highVisitsRange" type="number" class="form-control" placeholder="" min="0"></div>
+                  </div>
+                </div>
+                <div class="pad">
+                  <div class="form-group">
+                    <div class="center-text"><label>Total Revenue Range</label></div>
+                    <div class="flex-container2">
+                      <div class="pad2"><input id="lowRevenueRange" type="number" class="form-control" placeholder="" min="0"></div>
+                      <div class="pad"><input id="highRevenueRange" type="number" class="form-control" placeholder="" min="0"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <div class="flex-container">
+              <div class="pad"><button id="filterBtn" class="btn btn-primary">Filter</button></div>
+              <div class="pad"><button id="detailBtn" class="btn btn-primary">Daily Detail</button></div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Date <span id="sortDate" onclick="sorting(1)" class="icon icon-up-dir"></span></th>
+                      <th>Event Count <span id="sortEventCount" onclick="sorting(2)" class="icon icon-up-dir"></span></th>
+                      <th>Staff Count <span id="sortStaffCount" onclick="sorting(3)" class="icon icon-up-dir"></span></th>
+                      <th>Total Visits <span id="sortVisits" onclick="sorting(4)" class="icon icon-up-dir"></span></th>
+                      <th>Total Revenue($) <span id="sortRevenue" onclick="sorting(5)" class="icon icon-up-dir"></span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="siteReport.js"></script>
+  </body>
+</html>

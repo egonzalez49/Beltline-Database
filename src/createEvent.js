@@ -22,6 +22,7 @@ var getStaffEndDate = null;
 var eventName;
 var eventDate;
 var manager;
+var managerSite = null;
 
 window.addEventListener("load", function() {
   //console.log("Ran load code.")
@@ -41,6 +42,20 @@ ipc.on("event", function(event, name, type, man) {
   eventDate = type;
   manager = man;
 
+  getManagerSite(function(row) {
+    managerSite = row[0][0].SITENAME;
+    console.log("SITENAME: " + row[0][0].SITENAME);
+    if (managerSite === null || managerSite === '' || managerSite === undefined) {
+        dialog.showErrorBox('No manager site.', 'You do not manage any site.', (response) => {
+          //backBtn.click();
+          //ipc.send("load-page", 'file://' + __dirname + '/manageEvent.html', 750, 850);
+          //remote.getCurrentWindow().close();
+        });
+        createBtn.style.display = "none";
+
+    }
+  }, manager);
+
   //console.log("ROUTE: " + transitRoute);
   //console.log("TYPE: " + transitType);
 
@@ -56,6 +71,8 @@ ipc.on("event", function(event, name, type, man) {
 
   //}, transitRoute, transitType);
 });
+
+var userNames = [];
 
 getBtn.addEventListener("click", function() {
   getStaffStartDate = startDate.value;
@@ -92,11 +109,13 @@ getBtn.addEventListener("click", function() {
 
             //var routeText  = document.createTextNode('' + transit.ROUTE);
         staffName.innerHTML =  "<input type='checkbox'>" + staff.FNAME + " " + staff.LNAME;
+        userNames.push(''+staff.USERNAME);
             //route.appendChild(routeText);
         i++;
       });
     }
   }, start, end);
+  event.preventDefault();
 })
 
 createBtn.addEventListener("click", function() {
@@ -156,18 +175,19 @@ createBtn.addEventListener("click", function() {
   var number = 0;
   var sitesList = [];
   checkboxes = document.getElementsByTagName("input");
-  for (var i = 7; i < checkboxes.length; i++) {
+  console.log(checkboxes.length);
+  for (var i = 6; i < checkboxes.length; i++) {
     var checkbox = checkboxes[i];
     if(checkbox.checked) {
       checked = true;
       //ipc.send("error-log", "SUCCESSFULLY FOUND CHECKED AT " + i);
       //console.log(table.childNodes[i-3]);
-      var row = table.childNodes[i-7];
+      var row = table.childNodes[i-6];
       //ipc.send("error-log", "row length" + row.childNodes.length);
       for (var j = 0; j < row.childNodes.length; j++) {
         if (j === 0) {
           var sitesName = row.childNodes[j].innerText;
-          sitesList.push(sitesName);
+          sitesList.push(userNames[i-6]);
           number++;
           break;
           //ipc.send("error-log", "USER: " + user2Approve);
@@ -177,6 +197,7 @@ createBtn.addEventListener("click", function() {
     }
   }
   console.log(sitesList);
+  console.log(userNames);
 
   if (!checked) {
     event.preventDefault();
@@ -186,7 +207,7 @@ createBtn.addEventListener("click", function() {
 
   if (number < minimumStaff) {
     event.preventDefault();
-    dialog.showErrorBox('Staff Minimum of ' + minimumStaff'.', 'Please select more staff.');
+    dialog.showErrorBox('Staff Minimum of ' + minimumStaff + '.', 'Please select more staff.');
     return true;
   }
 
@@ -196,11 +217,12 @@ createBtn.addEventListener("click", function() {
     if (!err) {
       dialog.showMessageBox(null, options, (response) => {
         console.log(response);
-        ipc.send("load-page", 'file://' + __dirname + '/manageTransit.html', 705, 700);
+        ipc.send("load-page", 'file://' + __dirname + '/manageEvent.html', 750, 850);
         remote.getCurrentWindow().close();
       });
     }
-  }, manager, error);
+  }, manager, sitesList, newStart, newEnd, nameOfEvent, minimumStaff, newcapacity, description, newprice, managerSite, error);
+  console.log("HERE");
   event.preventDefault();
 
   // const modalPath = path.join('file://', __dirname, 'editTransit.html')
@@ -208,7 +230,7 @@ createBtn.addEventListener("click", function() {
   // remote.getCurrentWindow().close();
 });
 
-function editTransit(callback, mnger, error) {
+function editTransit(callback, mnger, sitesList, newStart, newEnd, nameOfEvent, minimumStaff, newcapacity, description, newprice, sites, error) {
 
   // Add the credentials to access your database
   const connection = mysql.createConnection({
@@ -228,12 +250,18 @@ function editTransit(callback, mnger, error) {
       }
   });
 
+  var values = [];
+  sitesList.forEach(function (e) {
+    values.push([e, ''+newStart, ''+nameOfEvent, ''+sites]);
+  });
+  console.log(values);
+
   // Perform a query
-  $queryLog = 'CALL create_event("'+mnger+'", "'+newroute+'", "'+newprice+'")';
+  $queryLog = 'CALL create_event("'+sites+'", "'+nameOfEvent+'", "'+newprice+'", "'+newcapacity+'", "'+minimumStaff+'", "'+newStart+'", "'+newEnd+'", "'+description+'");';
   connection.query($queryLog, function(err, result) {
       if(err){
         if (err.code === 'ER_DUP_ENTRY') {
-           dialog.showErrorBox('Duplicate transit type and route.', 'Make sure route name and type is unique.')
+           dialog.showErrorBox('Duplicate event name and start date.', 'Make sure the event name is unique or does not overlap existing events.')
            error = true;
         }
         ipc.send("error-log", err);
@@ -247,9 +275,11 @@ function editTransit(callback, mnger, error) {
 
       console.log("Got to before inserting connect.");
 
-      $query = 'INSERT INTO `transit_connect` (TYPE, ROUTE, SITENAME) VALUES ?';
+      $query = 'INSERT INTO `assign_to` (USERNAME, STARTDATE, EVENTNAME, SITENAME) VALUES ?';
       connection.query($query, [values], function(err, result) {
           if(err) {
+            console.log(err);
+            ipc.send("error-log", err);
             error = true;
             // if (err.code === 'ER_DUP_ENTRY') {
             //    dialog.showErrorBox('Duplicate email(s).', 'Make sure emails are unique and try again.')
@@ -286,6 +316,41 @@ function editTransit(callback, mnger, error) {
           callback(error);
       });
 
+  });
+
+  return;
+}
+
+function getManagerSite(callback, mnger) {
+
+  const connection = mysql.createConnection({
+      host     : 'localhost',
+      user     : 'root',
+      password : 'test',
+      database : 'beltline',
+      insecureAuth : true
+  });
+
+  connection.connect(function (err) {
+      if(err){
+          console.log(err.code);
+          console.log(err.fatal);
+      }
+  });
+
+  $queryTransits = 'CALL get_manager_site("'+mnger+'")';
+  ipc.send("error-log", $queryTransits);
+  connection.query($queryTransits, function(err, rows, result) {
+      if(err){
+        ipc.send("error-log", err);
+        console.log("An error occurred performing the query.");
+        console.log(err);
+        connection.end(function(){});
+        return;
+      }
+      ipc.send("error-log", rows);
+      callback(rows);
+      connection.end(function(){});
   });
 
   return;
