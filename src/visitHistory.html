@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>Visit History</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Event</label></div>
+                <input id="eventName" type="text" class="form-control" maxlength="50" placeholder="">
+              </div>
+              <div class="pad">
+                <div class="form-group">
+                  <div class="center-text"><label>Site</label></div>
+                  <select id="dropdown" class="form-control">
+                    <option value="All">All</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div clas="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Start Date</label></div>
+                <input id="startDate" type="date" class="form-control" placeholder="">
+              </div>
+              <div class="form-group">
+                  <div class="center-text"><label>End Date</label></div>
+                  <input id="endDate" type="date" class="form-control" placeholder="">
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="pad"><button id="filterBtn" class="btn btn-primary">Filter</button></div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Date <span id="sort1" onclick="sorting(1)" class="icon icon-arrow-combo"></span></th>
+                      <th>Event <span id="sort2" onclick="sorting(2)" class="icon icon-arrow-combo"></span></th>
+                      <th>Site <span id="sort3" onclick="sorting(3)" class="icon icon-arrow-combo"></span></th>
+                      <th>Price <span id="sort4" onclick="sorting(4)" class="icon icon-arrow-combo"></span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" type="submit" class="btn btn-form btn-default">Back</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="visitHistory.js"></script>
+  </body>
+</html>
