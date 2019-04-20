@@ -79,6 +79,6 @@ reportBtn.addEventListener('click', function (event) {
 })
 
 backBtn.addEventListener('click', function() {
-  ipc.send("load-page", 'file://' + __dirname + '/index.html', 500, 425);
+  ipc.send("load-page-logout", 'file://' + __dirname + '/index.html', 500, 425);
   remote.getCurrentWindow().close();
 })

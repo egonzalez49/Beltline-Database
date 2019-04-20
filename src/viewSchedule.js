@@ -17,11 +17,11 @@ var startDate;
 var endDate;
 var descriptor;
 var nameOfEvent;
-var sortName = 0;
-var sortSite = 0;
-var sortStart = 0;
-var sortEnd = 0;
-var sortStaff = 0;
+var sortName = -1;
+var sortSite = -1;
+var sortStart = -1;
+var sortEnd = -1;
+var sortStaff = -1;
 var arrowName = document.getElementById('sortEvent');
 var arrowSite = document.getElementById('sortSite');
 var arrowStart = document.getElementById('sortStart');
@@ -100,44 +100,64 @@ function validateData() {
 function sorting(value) {
   ipc.send("error-log", value);
   if (value === 1) {
-    if (sortName === 0) {
-      sortName = 1; //down arrow
-      arrowName.className = "icon icon-down-dir"
-    } else {
+    if (sortName === -1) {
       sortName = 0;
-      arrowName.className = "icon icon-up-dir"
+      arrowName.className = "icon icon-up-dir";
+    } else if (sortName === 0) {
+      sortName = 1; //down arrow
+      arrowName.className = "icon icon-down-dir";
+    } else if (sortName === 1) {
+      sortName = -1;
+      arrowName.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 2) {
-    if (sortSite === 0) {
-      sortSite = 1;
-      arrowSite.className = "icon icon-up-dir"
-    } else {
+    if (sortSite === -1) {
       sortSite = 0;
-      arrowSite.className = "icon icon-down-dir"
+      arrowSite.className = "icon icon-up-dir";
+    } else if (sortSite === 0) {
+      sortSite = 1; //down arrow
+      arrowSite.className = "icon icon-down-dir";
+    } else if (sortSite === 1) {
+      sortSite = -1;
+      arrowSite.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 3) {
-    if (sortStart === 0) {
-      sortStart = 1;
-      arrowStart.className = "icon icon-up-dir"
-    } else {
+    if (sortStart === -1) {
       sortStart = 0;
-      arrowStart.className = "icon icon-down-dir"
+      arrowStart.className = "icon icon-up-dir";
+    } else if (sortStart === 0) {
+      sortStart = 1; //down arrow
+      arrowStart.className = "icon icon-down-dir";
+    } else if (sortStart === 1) {
+      sortStart = -1;
+      arrowStart.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 4) {
-    if (sortEnd === 0) {
-      sortEnd = 1;
-      arrowEnd.className = "icon icon-up-dir"
-    } else {
+    if (sortEnd === -1) {
       sortEnd = 0;
-      arrowEnd.className = "icon icon-down-dir"
+      arrowEnd.className = "icon icon-up-dir";
+    } else if (sortEnd === 0) {
+      sortEnd = 1; //down arrow
+      arrowEnd.className = "icon icon-down-dir";
+    } else if (sortEnd === 1) {
+      sortEnd = -1;
+      arrowEnd.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 5) {
-    if (sortStaff === 0) {
-      sortStaff = 1;
-      arrowStaff.className = "icon icon-up-dir"
-    } else {
+    if (sortStaff === -1) {
       sortStaff = 0;
-      arrowStaff.className = "icon icon-down-dir"
+      arrowStaff.className = "icon icon-up-dir";
+    } else if (sortStaff === 0) {
+      sortStaff = 1; //down arrow
+      arrowStaff.className = "icon icon-down-dir";
+    } else if (sortStaff === 1) {
+      sortStaff = -1;
+      arrowStaff.className = "icon icon-arrow-combo";
+      return;
     }
   }
 

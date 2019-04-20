@@ -164,6 +164,11 @@ updateBtn.addEventListener("click", function() {
       dialog.showMessageBox(null, options, (response) => {
         console.log(response);
       });
+      if (addVisitor = 1) {
+        ipc.send("update-type-add");
+      } else if (removeVisitor = 1) {
+        ipc.send("update-type-remove");
+      }
     }
   //   //Remove all table rows (except header)
   //   //ipc.send("error-log", rows);

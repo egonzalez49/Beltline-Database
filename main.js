@@ -223,12 +223,23 @@ ipc.on('load-page-event', (event, arg, width, height, name, date) => {
     //win.loadURL(arg);
     currentEvent.name = name;
     currentEvent.startdate = date;
+    console.log(date);
     win = new BrowserWindow({ frame: true, width: width, height: height })
     win.setMenu(null)
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
     win.webContents.openDevTools()
+});
+
+ipc.on('update-type-add', (event) => {
+    //win.loadURL(arg);
+    currentUser.type += "v";
+});
+
+ipc.on('update-type-remove', (event) => {
+    //win.loadURL(arg);
+    currentUser.type = currentUser.type.split("v")[0];
 });
 
 ipc.on('update-event-value', function(event) {

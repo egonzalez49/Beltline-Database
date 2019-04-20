@@ -178,11 +178,13 @@ filterBtn.addEventListener("click", function() {
   highVisits = hV.value;
   lowEvent = lE.value;
   highEvent = hE.value;
-  visit = visitCheck.value;
+  visit = visitCheck.checked;
 
   if (visit) {
     visit = 1;
-  } else { visit = 0;}
+  } else {
+    visit = 0;
+  }
 
   //Make sure data is valid.
   if (validateData()) {

@@ -31,20 +31,26 @@ var lVisit;
 var hVisit;
 var lRev;
 var hRev;
-var sortName = 0;
-var sortStaff = 0;
-var sortDay = 0;
-var sortVisits = 0;
-var sortRevenue = 0;
-var arrowName = document.getElementById('sortName');
-var arrowStaff = document.getElementById('sortStaff');
-var arrowDay = document.getElementById('sortDay');
-var arrowVisit = document.getElementById('sortVisits');
-var arrowRev = document.getElementById('sortRevenue');
+var sort1 = -1;
+var sort2 = -1;
+var sort3 = -1;
+var sort4 = -1;
+var sort5 = -1;
+var arrow1 = document.getElementById('sortName');
+var arrow2 = document.getElementById('sortStaff');
+var arrow3 = document.getElementById('sortDay');
+var arrow4 = document.getElementById('sortVisits');
+var arrow5 = document.getElementById('sortRevenue');
 var userName;
+var managerSite;
 
 ipc.on("userName", function(event, name) {
   userName = name;
+  getManagerSite(function(row) {
+    managerSite = row[0][0].SITENAME;
+    console.log("SITE: " + managerSite);
+  }, userName);
+  console.log("MANAGER: " + userName);
 });
 
 //Popup screen settings.
@@ -79,11 +85,11 @@ function validateData() {
 
   //When the range is left empty, do the following:
   if (lRev === null || lRev === "") {
-    lRev = 0;
+    lRev = 0.00;
   }
 
   if (hRev === null || hRev === "") {
-    hRev = 99;
+    hRev = 9999.00;
   }
 
   if (lDuration > hDuration) {
@@ -120,10 +126,14 @@ function validateData() {
     descSearch = 'null';
   }
 
-  if (startDate === null || startDate === "" || endDate === null || endDate === "") {
-    dialog.showErrorBox('Date fields not filled in.', 'Please select a start and end date.');
-    return true;
+  if (startDate === null || startDate === "") {
+    startDate = "1900-10-10";
   }
+
+  if (endDate === null || endDate === "") {
+    endDate = "2200-10-10";
+  }
+
 
   if (startDate > endDate) {
     dialog.showErrorBox('Incorrect date range.', 'Make sure the date range is valid.');
@@ -140,49 +150,66 @@ function validateData() {
 function sorting(value) {
   ipc.send("error-log", value);
   if (value === 1) {
-    if (sortName === 0) {
-      sortName = 1; //down arrow
-      arrowName.className = "icon icon-down-dir"
-    } else {
-      sortName = 0;
-      arrowName.className = "icon icon-up-dir"
+    if (sort1 === -1) {
+      sort1 = 0;
+      arrow1.className = "icon icon-up-dir";
+    } else if (sort1 === 0) {
+      sort1 = 1; //down arrow
+      arrow1.className = "icon icon-down-dir";
+    } else if (sort1 === 1) {
+      sort1 = -1;
+      arrow1.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 2) {
-    if (sortStaff === 0) {
-      sortStaff = 1;
-      arrowStaff.className = "icon icon-up-dir"
-    } else {
-      sortStaff = 0;
-      arrowStaff.className = "icon icon-down-dir"
-    }
-  } else if (value === 3) {
-    if (sortDay === 0) {
-      sortDay = 1;
-      arrowDay.className = "icon icon-up-dir"
-    } else {
-      sortDay = 0;
-      arrowDay.className = "icon icon-down-dir"
-    }
-  } else if (value === 4) {
-    if (sortVisits === 0) {
-      sortVisits = 1;
-      arrowVisit.className = "icon icon-up-dir"
-    } else {
-      sortVisits = 0;
-      arrowVisit.className = "icon icon-down-dir"
-    }
-  } else if (value === 5) {
-    if (sortRevenue === 0) {
-      sortRevenue = 1;
-      arrowRev.className = "icon icon-up-dir"
-    } else {
-      sortRevenue = 0;
-      arrowRev.className = "icon icon-down-dir"
-    }
-  }
+      if (sort2 === -1) {
+        sort2 = 0;
+        arrow2.className = "icon icon-up-dir";
+      } else if (sort2 === 0) {
+        sort2 = 1; //down arrow
+        arrow2.className = "icon icon-down-dir";
+      } else if (sort2 === 1) {
+        sort2 = -1;
+        arrow2.className = "icon icon-arrow-combo";
+      }
+    } else if (value === 3) {
+        if (sort3 === -1) {
+          sort3 = 0;
+          arrow3.className = "icon icon-up-dir";
+        } else if (sort3 === 0) {
+          sort3 = 1; //down arrow
+          arrow3.className = "icon icon-down-dir";
+        } else if (sort3 === 1) {
+          sort3 = -1;
+          arrow3.className = "icon icon-arrow-combo";
+        }
+      } else if (value === 4) {
+          if (sort4 === -1) {
+            sort4 = 0;
+            arrow4.className = "icon icon-up-dir";
+          } else if (sort4 === 0) {
+            sort4 = 1; //down arrow
+            arrow4.className = "icon icon-down-dir";
+          } else if (sort4 === 1) {
+            sort4 = -1;
+            arrow4.className = "icon icon-arrow-combo";
+          }
+      } else if (value === 5) {
+        if (sort5 === -1) {
+          sort5 = 0;
+          arrow5.className = "icon icon-up-dir";
+        } else if (sort5 === 0) {
+          sort5 = 1; //down arrow
+          arrow5.className = "icon icon-down-dir";
+        } else if (sort5 === 1) {
+          sort5 = -1;
+          arrow5.className = "icon icon-arrow-combo";
+        }
+      }
   filterBtn.click();
 }
 
+var dates = [];
 filterBtn.addEventListener("click", function() {
   //Set values of all variables and do testing.
   nameSearch = filterName.value;
@@ -213,33 +240,33 @@ filterBtn.addEventListener("click", function() {
       while (table.firstChild) {
         table.removeChild(table.firstChild);
       }
-      rows.forEach(function(transit) {
+      dates = [];
+      rows.forEach(function(e) {
         var row = table.insertRow(i);
         //row.innerHTML = "<td>" + transit.ROUTE + "</td><td>" + transit.TYPE + "</td><td>" + transit.PRICE + "</td><td>" + transit.COUNT + "</td>";
-        ipc.send("error-log", transit);
+        ipc.send("error-log", e);
 
-        var route = row.insertCell(0);
-        var type = row.insertCell(1);
-        var price = row.insertCell(2);
-        var count = row.insertCell(3);
-        var logged = row.insertCell(4);
+        var c1 = row.insertCell(0);
+        var c2 = row.insertCell(1);
+        var c3 = row.insertCell(2);
+        var c4 = row.insertCell(3);
+        var c5 = row.insertCell(4);
 
         //var routeText  = document.createTextNode('' + transit.ROUTE);
-        route.innerHTML =  "<input type='radio' name='radios'>" + transit.ROUTE;
+        c1.innerHTML =  "<input type='radio' name='radios'>" + e.EVENTNAME;
         //route.appendChild(routeText);
 
-        type.appendChild(document.createTextNode("" + transit.TYPE));
-        price.appendChild(document.createTextNode("" + transit.PRICE));
-        count.appendChild(document.createTextNode("" + transit.SITECONNECT));
-        if (transit.LOGGED === null) {
-          logged.appendChild(document.createTextNode("0"));
-        } else {
-          logged.appendChild(document.createTextNode("" + transit.LOGGED));
-        }
+        c2.appendChild(document.createTextNode("" + e.STAFFCOUNT));
+        c3.appendChild(document.createTextNode("" + e.DURATION));
+        c4.appendChild(document.createTextNode("" + e.TOTALVISITS));
+        c5.appendChild(document.createTextNode("" + e.TOTALREVENUE));
+
+        dates.push(e.STARTDATE.toISOString().split('T')[0]);
         i++;
       });
+      console.log(dates);
     }
-  }, nameSearch, descSearch, startDate, endDate, lDuration, hDuration, lVisit, hVisit, lRev, hRev, sortName, sortStaff, sortDay, sortVisits, sortRevenue);
+  }, nameSearch, descSearch, startDate, endDate, lDuration, hDuration, lVisit, hVisit, lRev, hRev, sort1, sort2, sort3, sort4, sort5);
 
   event.preventDefault();
 });
@@ -283,25 +310,23 @@ createBtn.addEventListener("click", function() {
 
 editBtn.addEventListener("click", function() {
   var checked = false;
-  var route2send;
-  var type2send;
+  var name2send = null;
+  var date2send = null;
   checkboxes = document.getElementsByTagName("input");
-  for (var i = 3; i < checkboxes.length; i++) {
+  for (var i = 10; i < checkboxes.length; i++) {
     var checkbox = checkboxes[i];
+    date2send = dates[i-10];
     if(checkbox.checked) {
       checked = true;
       //ipc.send("error-log", "SUCCESSFULLY FOUND CHECKED AT " + i);
       //console.log(table.childNodes[i-3]);
-      var row = table.childNodes[i-3];
+      var row = table.childNodes[i-10];
       //ipc.send("error-log", "row length" + row.childNodes.length);
       for (var j = 0; j < row.childNodes.length; j++) {
         if (j === 0) {
-          route2send = row.childNodes[j].innerText;
+          name2send = row.childNodes[j].innerText;
           //break;
           //ipc.send("error-log", "USER: " + user2Approve);
-        } else if (j === 1) {
-          type2send = row.childNodes[j].innerText;
-          break;
         }
       }
       break;
@@ -310,34 +335,33 @@ editBtn.addEventListener("click", function() {
 
   if (!checked) {
     event.preventDefault();
-    dialog.showErrorBox('No transit selected.', 'Please select a transit.');
+    dialog.showErrorBox('No event selected.', 'Please select an event.');
     return true;
   }
-  const modalPath = path.join('file://', __dirname, 'editTransit.html')
-  ipc.send("load-page-transit", modalPath, 500, 625, route2send, type2send);
+  const modalPath = path.join('file://', __dirname, 'editEvent.html')
+  ipc.send("load-page-event", modalPath, 700, 800, name2send, date2send);
   remote.getCurrentWindow().close();
 });
 
+//TODO --------------------------------------------------------------------------
 deleteBtn.addEventListener("click", function() {
   var checked = false;
-  var sitesName;
-  var route2delete;
+  var event2delete;
+  var date2delete;
   checkboxes = document.getElementsByTagName("input");
-  for (var i = 3; i < checkboxes.length; i++) {
+  for (var i = 10; i < checkboxes.length; i++) {
     var checkbox = checkboxes[i];
     if(checkbox.checked) {
       checked = true;
+      date2delete = dates[i-10];
       //ipc.send("error-log", "SUCCESSFULLY FOUND CHECKED AT " + i);
-      var row = table.childNodes[i-3];
+      var row = table.childNodes[i-10];
       //ipc.send("error-log", "row length" + row.childNodes.length);
       for (var j = 0; j < row.childNodes.length; j++) {
         if (j === 0) {
-          sitesName = row.childNodes[j].innerText;
-          //break;
-          //ipc.send("error-log", "USER: " + user2Approve);
-        } else if (j === 1) {
-          route2delete = row.childNodes[j].innerText;
+          event2delete = row.childNodes[j].innerText;
           break;
+          //ipc.send("error-log", "USER: " + user2Approve);
         }
       }
       break;
@@ -346,7 +370,7 @@ deleteBtn.addEventListener("click", function() {
 
   if (!checked) {
     event.preventDefault();
-    dialog.showErrorBox('No transit selected.', 'Please select a transit.');
+    dialog.showErrorBox('No event selected.', 'Please select an event.');
     return true;
   }
 
@@ -357,11 +381,11 @@ deleteBtn.addEventListener("click", function() {
           console.log(response);
         });
       }
-    }, sitesName, route2delete, error);
+    }, event2delete, date2delete, error);
     //event.preventDefault();
 });
 
-function removeTransit(callback, siteName, route2delete, error) {
+function removeTransit(callback, e2, d2, error) {
 
   const connection = mysql.createConnection({
       host     : 'localhost',
@@ -378,7 +402,7 @@ function removeTransit(callback, siteName, route2delete, error) {
       }
   });
 
-  $queryUsers = 'CALL delete_transit("'+route2delete+'", "'+siteName+'")';
+  $queryUsers = 'CALL delete_event("'+e2+'", "'+d2+'", "'+managerSite+'")';
   connection.query($queryUsers, function(err, rows, result) {
       if(err){
         ipc.send("error-log", err);
@@ -466,8 +490,44 @@ function insertEvents(callback, searchName, searchDesc, searchSDate, searchEDate
       }
   });
 
-  $queryTransits = 'CALL event_search("'+searchName+'", "'+searchDesc+'", "'+searchSDate+'", "'+searchEDate+'", "'+searchLDur+'", "'+searchHDur+'", "'+searchLRev+'", "'+searchHRev+'", "'+searchLVis+'", "'+searchHVis+'", "'+sortName
+  $queryTransits = 'CALL event_search("'+userName+'", "'+managerSite+'", "'+searchName+'", "'+searchDesc+'", "'+searchSDate+'", "'+searchEDate+'", "'+searchLDur+'", "'+searchHDur+'", "'+searchLRev+'", "'+searchHRev+'", "'+searchLVis+'", "'+searchHVis+'", "'+sortName
   +'", "'+sortStaff+'", "'+sortDay+'", "'+sortVisits+'", "'+sortRevenue+'")';
+  ipc.send("error-log", $queryTransits);
+  connection.query($queryTransits, function(err, rows, result) {
+      if(err){
+        ipc.send("error-log", err);
+
+        console.log("An error occurred performing the query.");
+        console.log(err);
+        connection.end(function(){});
+        return;
+      }
+      ipc.send("error-log", rows);
+      callback(rows);
+      connection.end(function(){});
+  });
+
+  return;
+}
+
+function getManagerSite(callback, mnger) {
+
+  const connection = mysql.createConnection({
+      host     : 'localhost',
+      user     : 'root',
+      password : 'test',
+      database : 'beltline',
+      insecureAuth : true
+  });
+
+  connection.connect(function (err) {
+      if(err){
+          console.log(err.code);
+          console.log(err.fatal);
+      }
+  });
+
+  $queryTransits = 'CALL get_manager_site("'+mnger+'")';
   ipc.send("error-log", $queryTransits);
   connection.query($queryTransits, function(err, rows, result) {
       if(err){

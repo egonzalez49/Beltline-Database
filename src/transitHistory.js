@@ -15,10 +15,10 @@ const filterBtn = document.getElementById('filterBtn')
 const backBtn = document.getElementById('cancelBtn')
 var sDate;
 var eDate;
-var sortD = 0;
-var sortR = 0;
-var sortTT = 0;
-var sortP = 0;
+var sortD = -1;
+var sortR = -1;
+var sortTT = -1;
+var sortP = -1;
 var arrowD = document.getElementById('sortD');
 var arrowR = document.getElementById('sortR');
 var arrowTT = document.getElementById('sortTT');
@@ -52,36 +52,52 @@ function validateDate() {
 function sorting(value) {
   ipc.send("error-log", value);
   if (value === 1) {
-    if (sortD === 0) {
-      sortD = 1; //down arrow
-      arrowD.className = "icon icon-down-dir"
-    } else {
+    if (sortD === -1) {
       sortD = 0;
-      arrowD.className = "icon icon-up-dir"
+      arrowD.className = "icon icon-up-dir";
+    } else if (sortD === 0) {
+      sortD = 1; //down arrow
+      arrowD.className = "icon icon-down-dir";
+    } else if (sortD === 1) {
+      sortD = -1;
+      arrowD.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 2) {
-    if (sortR === 0) {
-      sortR = 1;
-      arrowR.className = "icon icon-up-dir"
-    } else {
+    if (sortR === -1) {
       sortR = 0;
-      arrowR.className = "icon icon-down-dir"
+      arrowR.className = "icon icon-up-dir";
+    } else if (sortR === 0) {
+      sortR = 1; //down arrow
+      arrowR.className = "icon icon-down-dir";
+    } else if (sortR === 1) {
+      sortR = -1;
+      arrowR.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 3) {
-    if (sortTT === 0) {
-      sortTT = 1;
-      arrowTT.className = "icon icon-up-dir"
-    } else {
+    if (sortTT === -1) {
       sortTT = 0;
-      arrowTT.className = "icon icon-down-dir"
+      arrowTT.className = "icon icon-up-dir";
+    } else if (sortTT === 0) {
+      sortTT = 1; //down arrow
+      arrowTT.className = "icon icon-down-dir";
+    } else if (sortTT === 1) {
+      sortTT = -1;
+      arrowTT.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 4) {
-    if (sortP === 0) {
-      sortP = 1;
-      arrowP.className = "icon icon-up-dir"
-    } else {
+    if (sortP === -1) {
       sortP = 0;
-      arrowP.className = "icon icon-down-dir"
+      arrowP.className = "icon icon-up-dir";
+    } else if (sortP === 0) {
+      sortP = 1; //down arrow
+      arrowP.className = "icon icon-down-dir";
+    } else if (sortP === 1) {
+      sortP = -1;
+      arrowP.className = "icon icon-arrow-combo";
+      return;
     }
   }
   filterBtn.click();
@@ -91,9 +107,12 @@ filterBtn.addEventListener("click", function() {
   sDate = startDate.value;
   eDate = endDate.value;
 
-  if (sDate === null || sDate === "" || eDate === null || eDate === "") {
-    dialog.showErrorBox('Date fields not filled in.', 'Please select a start and end date.');
-    return true;
+  if (sDate === null || sDate === "") {
+    sDate = "1900-10-10";
+  }
+
+  if (eDate === null || eDate === "") {
+    eDate = "2200-10-10";
   }
 
 

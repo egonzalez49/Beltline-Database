@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Atlanta Beltline</title>
+    <link rel="stylesheet" href="../assets/css/photon.css">
+    <link rel="stylesheet" href="../assets/css/registration.css"
+  </head>
+  <body>
+    <div class="window">
+      <div class="window-content">
+        <div class="top-text">
+          <h3>View/Edit Event</h3>
+        </div>
+        <div class="center">
+          <form>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Name</label></div>
+                <p id="eventName">Test</p>
+              </div>
+              <div class="pad">
+                <div class="flex-container">
+                  <div class="form-group">
+                    <div class="center-text"><label>Minimum Staff</label></div>
+                    <p id="minStaff">Test</p>
+                  </div>
+                  <div class="form-group">
+                    <div class="pad">
+                      <div class="center-text"><label>Price</label></div>
+                      <p id="price">Test</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Capacity</label></div>
+                <p id="capacity">Test</p>
+              </div>
+              <div class="pad">
+                <div class="flex-container">
+                  <div class="form-group">
+                    <div class="center-text"><label>Start Date</label></div>
+                    <p id="startDate">Test</p>
+                  </div>
+                  <div class="form-group">
+                    <div class="pad">
+                      <div class="center-text"><label>End Date</label></div>
+                      <p id="endDate">Test</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea id="desc" class="form-control" rows="3"></textarea>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Staff</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody">
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <div class="center-text"><label>Daily Visits Range</label></div>
+                <div class="flex-container2">
+                  <div class="pad2"><input id="lowVisit" type="number" class="form-control" placeholder="" min="0"></div>
+                  <div class="pad"><input id="highVisit" type="number" class="form-control" placeholder="" min="0"></div>
+                </div>
+              </div>
+              <div class="pad">
+                <div class="form-group">
+                  <div class="center-text"><label>Daily Revenue Range</label></div>
+                  <div class="flex-container2">
+                    <div class="pad2"><input id="lowRev" type="number" class="form-control" placeholder="" min="0"></div>
+                    <div class="pad"><input id="highRev" type="number" class="form-control" placeholder="" min="0"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="flex-container">
+              <div class="form-group">
+                <table class="table-striped">
+                  <thead>
+                    <tr>
+                      <th>Date <span id="sort1" onclick="sorting(1)" class="icon icon-arrow-combo"></span></th>
+                      <th>Daily Visits <span id="sort2" onclick="sorting(2)" class="icon icon-arrow-combo"></span></th>
+                      <th>Daily Revenue <span id="sort3" onclick="sorting(3)" class="icon icon-arrow-combo"></span></th>
+                    </tr>
+                  </thead>
+                  <tbody id="tBody2">
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                   <tr>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                     <td>&nbsp;</td>
+                   </tr>
+                 </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="form-actions">
+              <div class="center-button">
+                <button id="cancelBtn" class="btn btn-form btn-default">Back</button>
+                <button id="filterBtn" class="btn btn-form btn-default">Filter</button>
+                <button id="updateBtn" class="btn btn-form btn-default">Update</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <script src="editEvent.js"></script>
+  </body>
+</html>

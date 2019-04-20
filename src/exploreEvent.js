@@ -31,12 +31,12 @@ var lowPrice;
 var highPrice;
 var visit;
 var sold;
-var sortName = 0;
-var sortStaff = 0;
-var sortDay = 0;
-var sortVisits = 0;
-var sortRevenue = 0;
-var sort6 = 0;
+var sortName = -1;
+var sortStaff = -1;
+var sortDay = -1;
+var sortVisits = -1;
+var sortRevenue = -1;
+var sort6 = -1;
 var arrowName = document.getElementById('sortEvent');
 var arrowStaff = document.getElementById('sortSite');
 var arrowDay = document.getElementById('sortPrice');
@@ -45,6 +45,10 @@ var arrowRev = document.getElementById('sortVisits');
 var arrow6 = document.getElementById('sortMy');
 
 var userName;
+
+ipc.on("userName", function(event, name) {
+  userName = name;
+});
 
 ipc.on("dailyevent2", function(event, name) {
   //userName = name;
@@ -129,52 +133,64 @@ function validateData() {
 function sorting(value) {
   ipc.send("error-log", value);
   if (value === 1) {
-    if (sortName === 0) {
-      sortName = 1; //down arrow
-      arrowName.className = "icon icon-down-dir"
-    } else {
+    if (sortName === -1) {
       sortName = 0;
-      arrowName.className = "icon icon-up-dir"
+      arrowName.className = "icon icon-up-dir";
+    } else if (sortName === 0) {
+      sortName = 1; //down arrow
+      arrowName.className = "icon icon-down-dir";
+    } else if (sortName === 1) {
+      sortName = -1;
+      arrowName.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 2) {
-    if (sortStaff === 0) {
-      sortStaff = 1;
-      arrowStaff.className = "icon icon-up-dir"
-    } else {
+    if (sortStaff === -1) {
       sortStaff = 0;
-      arrowStaff.className = "icon icon-down-dir"
+      arrowStaff.className = "icon icon-up-dir";
+    } else if (sortStaff === 0) {
+      sortStaff = 1; //down arrow
+      arrowStaff.className = "icon icon-down-dir";
+    } else if (sortStaff === 1) {
+      sortStaff = -1;
+      arrowStaff.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 3) {
-    if (sortDay === 0) {
-      sortDay = 1;
-      arrowDay.className = "icon icon-up-dir"
-    } else {
+    if (sortDay === -1) {
       sortDay = 0;
-      arrowDay.className = "icon icon-down-dir"
+      arrowDay.className = "icon icon-up-dir";
+    } else if (sortDay === 0) {
+      sortDay = 1; //down arrow
+      arrowDay.className = "icon icon-down-dir";
+    } else if (sortDay === 1) {
+      sortDay = -1;
+      arrowDay.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 4) {
-    if (sortVisits === 0) {
-      sortVisits = 1;
-      arrowVisit.className = "icon icon-up-dir"
-    } else {
+    if (sortVisits === -1) {
       sortVisits = 0;
-      arrowVisit.className = "icon icon-down-dir"
+      arrowVisit.className = "icon icon-up-dir";
+    } else if (sortVisits === 0) {
+      sortVisits = 1; //down arrow
+      arrowVisit.className = "icon icon-down-dir";
+    } else if (sortVisits === 1) {
+      sortVisits = -1;
+      arrowVisit.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 5) {
-    if (sortRevenue === 0) {
-      sortRevenue = 1;
-      arrowRev.className = "icon icon-up-dir"
-    } else {
+    if (sortRevenue === -1) {
       sortRevenue = 0;
-      arrowRev.className = "icon icon-down-dir"
-    }
-  } else if (value === 6) {
-    if (sort6 === 0) {
-      sort6 = 1;
-      arrow6.className = "icon icon-up-dir"
-    } else {
-      sort6 = 0;
-      arrow6.className = "icon icon-down-dir"
+      arrowRev.className = "icon icon-up-dir";
+    } else if (sortRevenue === 0) {
+      sortRevenue = 1; //down arrow
+      arrowRev.className = "icon icon-down-dir";
+    } else if (sortRevenue === 1) {
+      sortRevenue = -1;
+      arrowRev.className = "icon icon-arrow-combo";
+      return;
     }
   }
   filterBtn.click();
@@ -192,11 +208,13 @@ filterBtn.addEventListener("click", function() {
   highVisits = hV.value;
   lowPrice = lP.value;
   highPrice = hP.value;
-  visit = visitCheck.value;
+  visit = visitCheck.checked;
   if (visit) {
     visit = 1;
-  } else { visit = 0;}
-  sold = soldCheck.value;
+  } else {
+    visit = 0;
+  }
+  sold = soldCheck.checked;
   if (sold) {
     sold = 1;
   } else { sold = 0;}
@@ -226,7 +244,7 @@ filterBtn.addEventListener("click", function() {
         var c3 = row.insertCell(2);
         var c4 = row.insertCell(3);
         var c5 = row.insertCell(4);
-        var c6 = row.insertCell(4);
+        var c6 = row.insertCell(5);
 
         //var routeText  = document.createTextNode('' + transit.ROUTE);
         c1.innerHTML =  "<input type='radio' name='radios'>" + e.EVENTNAME;
@@ -293,6 +311,7 @@ viewBtn.addEventListener("click", function() {
 
 window.addEventListener("load", function() {
   ipc.send("update-dailyevent2-value");
+  ipc.send("update-username-value");
 });
 
 

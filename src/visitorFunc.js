@@ -6,6 +6,8 @@ const transitBtn = document.getElementById('transitBtn')
 const eventBtn = document.getElementById('eventBtn')
 const exploreSiteBtn = document.getElementById('siteBtn')
 const viewHistBtn = document.getElementById('visithistBtn')
+const transHistBtn = document.getElementById('transhistBtn')
+const backBtn = document.getElementById('cancelBtn')
 //const axios = require('axios')
 const ipc = require('electron').ipcRenderer;
 
@@ -42,8 +44,19 @@ siteBtn.addEventListener('click', function (event) {
   win.show()*/
 })
 
-siteBtn.addEventListener('click', function (event) {
+viewHistBtn.addEventListener('click', function (event) {
   const modalPath = path.join('file://', __dirname, 'visitHistory.html')
   ipc.send("load-page", modalPath, 750, 850);
+  remote.getCurrentWindow().close();
+})
+
+transHistBtn.addEventListener('click', function (event) {
+  const modalPath = path.join('file://', __dirname, 'transitHistory.html')
+  ipc.send("load-page", modalPath, 750, 850);
+  remote.getCurrentWindow().close();
+})
+
+backBtn.addEventListener('click', function() {
+  ipc.send("load-page-logout", 'file://' + __dirname + '/index.html', 500, 425);
   remote.getCurrentWindow().close();
 })
