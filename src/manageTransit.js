@@ -18,8 +18,8 @@ const editBtn = document.getElementById('editBtn')
 const deleteBtn = document.getElementById('deleteBtn')
 var lPrice;
 var hPrice;
-var sortTT = 0;
-var sortP = 0;
+var sortTT = -1;
+var sortP = -1;
 var arrowTT = document.getElementById('sortTT');
 var arrowP = document.getElementById('sortP');
 
@@ -60,21 +60,30 @@ function validatePrice() {
 
 function sorting(value) {
   ipc.send("error-log", value);
+
   if (value === 1) {
-    if (sortTT === 0) {
-      sortTT = 1; //down arrow
-      arrowTT.className = "icon icon-down-dir"
-    } else {
+    if (sortTT === -1) {
       sortTT = 0;
-      arrowTT.className = "icon icon-up-dir"
+      arrowTT.className = "icon icon-up-dir";
+    } else if (sortTT === 0) {
+      sortTT = 1; //down arrow
+      arrowTT.className = "icon icon-down-dir";
+    } else if (sortTT === 1) {
+      sortTT = -1;
+      arrowTT.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 2) {
-    if (sortP === 0) {
-      sortP = 1;
-      arrowP.className = "icon icon-up-dir"
-    } else {
+    if (sortP === -1) {
       sortP = 0;
-      arrowP.className = "icon icon-down-dir"
+      arrowP.className = "icon icon-up-dir";
+    } else if (sortP === 0) {
+      sortP = 1; //down arrow
+      arrowP.className = "icon icon-down-dir";
+    } else if (sortP === 1) {
+      sortP = -1;
+      arrowP.className = "icon icon-arrow-combo";
+      return;
     }
   }
   filterBtn.click();

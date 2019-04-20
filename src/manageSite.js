@@ -14,9 +14,9 @@ const createBtn = document.getElementById('createBtn')
 const editBtn = document.getElementById('editBtn')
 const deleteBtn = document.getElementById('deleteBtn')
 const backBtn = document.getElementById('cancelBtn')
-var sortN = 0;
-var sortM = 0;
-var sortO = 0;
+var sortN = -1;
+var sortM = -1;
+var sortO = -1;
 var arrowName = document.getElementById('sortName');
 var arrowManager = document.getElementById('sortManager');
 var arrowOpen = document.getElementById('sortOpen');
@@ -32,31 +32,44 @@ const options = {
 
 function sorting(value) {
   ipc.send("error-log", value);
+
   if (value === 1) {
-    if (sortN === 0) {
-      sortN = 1; //down arrow
-      arrowName.className = "icon icon-down-dir"
-    } else {
+    if (sortN === -1) {
       sortN = 0;
-      arrowName.className = "icon icon-up-dir"
+      arrowName.className = "icon icon-up-dir";
+    } else if (sortN === 0) {
+      sortN = 1; //down arrow
+      arrowName.className = "icon icon-down-dir";
+    } else if (sortN === 1) {
+      sortN = -1;
+      arrowName.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 2) {
-    if (sortM === 0) {
-      sortM = 1;
-      arrowManager.className = "icon icon-up-dir"
-    } else {
+    if (sortM === -1) {
       sortM = 0;
-      arrowManager.className = "icon icon-down-dir"
+      arrowManager.className = "icon icon-up-dir";
+    } else if (sortM === 0) {
+      sortM = 1; //down arrow
+      arrowManager.className = "icon icon-down-dir";
+    } else if (sortM === 1) {
+      sortM = -1;
+      arrowManager.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 3) {
-    if (sortO === 0) {
-      sortO = 1;
-      arrowOpen.className = "icon icon-up-dir"
-    } else {
+    if (sortO === -1) {
       sortO = 0;
-      arrowOpen.className = "icon icon-down-dir"
+      arrowOpen.className = "icon icon-up-dir";
+    } else if (sortO === 0) {
+      sortO = 1; //down arrow
+      arrowOpen.className = "icon icon-down-dir";
+    } else if (sortO === 1) {
+      sortO = -1;
+      arrowOpen.className = "icon icon-arrow-combo";
+      return;
     }
-  }
+  } 
 
   filterBtn.click();
 }

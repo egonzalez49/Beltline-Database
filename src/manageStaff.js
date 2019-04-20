@@ -19,8 +19,8 @@ var siteFromDropdown;
 var startDate;
 var endDate;
 var managerSite;
-var sortName = 0;
-var sortStaff = 0;
+var sortName = -1;
+var sortStaff = -1;
 var arrowName = document.getElementById('sortName');
 var arrowShift = document.getElementById('sortShift');
 var userName;
@@ -62,9 +62,12 @@ function validateData() {
     //siteFromDropDown;
   }
 
-  if (startDate === null || startDate === "" || endDate === null || endDate === "") {
-    dialog.showErrorBox('Date fields not filled in.', 'Please select a start and end date.');
-    return true;
+  if (startDate === null || startDate === "") {
+    startDate = "1900-10-10";
+  }
+
+  if (endDate === null || endDate === "") {
+    endDate = "2200-10-10";
   }
 
   if (startDate > endDate) {
@@ -77,21 +80,30 @@ function validateData() {
 //Deals with sorting arrows. 0 means sort ASC, 1 means DESC.
 function sorting(value) {
   ipc.send("error-log", value);
+
   if (value === 1) {
-    if (sortName === 0) {
-      sortName = 1; //down arrow
-      arrowName.className = "icon icon-down-dir"
-    } else {
+    if (sortName === -1) {
       sortName = 0;
-      arrowName.className = "icon icon-up-dir"
+      arrowName.className = "icon icon-up-dir";
+    } else if (sortName === 0) {
+      sortName = 1; //down arrow
+      arrowName.className = "icon icon-down-dir";
+    } else if (sortName === 1) {
+      sortName = -1;
+      arrowName.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 2) {
-    if (sortStaff === 0) {
-      sortStaff = 1;
-      arrowShift.className = "icon icon-up-dir"
-    } else {
+    if (sortStaff === -1) {
       sortStaff = 0;
-      arrowShift.className = "icon icon-down-dir"
+      arrowShift.className = "icon icon-up-dir";
+    } else if (sortStaff === 0) {
+      sortStaff = 1; //down arrow
+      arrowShift.className = "icon icon-down-dir";
+    } else if (sortStaff === 1) {
+      sortStaff = -1;
+      arrowShift.className = "icon icon-arrow-combo";
+      return;
     }
   }
 

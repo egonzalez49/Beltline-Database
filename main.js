@@ -36,7 +36,7 @@ function createWindow () {
   win.setMenu(null)
 
   // Open the DevTools.
-  win.webContents.openDevTools()
+  //win.webContents.openDevTools()
 
   // Emitted when the window is closed.
   win.on('closed', () => {
@@ -102,7 +102,7 @@ ipc.on('load-page', (event, arg, width, height) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('load-page-user', (event, arg, width, height, userName, type) => {
@@ -114,7 +114,7 @@ ipc.on('load-page-user', (event, arg, width, height, userName, type) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('load-page-site', (event, arg, width, height, siteName) => {
@@ -125,7 +125,7 @@ ipc.on('load-page-site', (event, arg, width, height, siteName) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('update-site-value', function(event) {
@@ -146,7 +146,7 @@ ipc.on('load-page-daily', (event, arg, width, height, siteName, startDate) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('update-daily-value', function(event) {
@@ -169,7 +169,7 @@ ipc.on('load-page-dailyevent', (event, arg, width, height, p1, p2, p3) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('update-dailyevent-value', function(event) {
@@ -194,7 +194,7 @@ ipc.on('load-page-dailyevent2', (event, arg, width, height, p1, p2, p3, p4) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('update-dailyevent2-value', function(event) {
@@ -211,7 +211,7 @@ ipc.on('load-page-transit', (event, arg, width, height, routes, types) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('update-transit-value', function(event) {
@@ -229,7 +229,7 @@ ipc.on('load-page-event', (event, arg, width, height, name, date) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('update-type-add', (event) => {
@@ -237,9 +237,12 @@ ipc.on('update-type-add', (event) => {
     currentUser.type += "v";
 });
 
-ipc.on('update-type-remove', (event) => {
+ipc.on('update-type-remove', (event, type) => {
     //win.loadURL(arg);
-    currentUser.type = currentUser.type.split("v")[0];
+    //currentUser.type += "v";
+    currentUser.type = type;
+    //currentUser.type = currentUser.type.split("v")[0];
+    console.log("TYPE:" + currentUser.type);
 });
 
 ipc.on('update-event-value', function(event) {
@@ -256,7 +259,7 @@ ipc.on('load-page-logout', (event, arg, width, height) => {
     //win.on('close', function () { win = null })
     win.loadURL(arg)
     win.show()
-    win.webContents.openDevTools()
+    //win.webContents.openDevTools()
 });
 
 ipc.on('load-back-page', () => {

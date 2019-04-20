@@ -166,8 +166,9 @@ updateBtn.addEventListener("click", function() {
       });
       if (addVisitor = 1) {
         ipc.send("update-type-add");
-      } else if (removeVisitor = 1) {
-        ipc.send("update-type-remove");
+      }
+      if (removeVisitor = 1) {
+        ipc.send("update-type-remove", accountType);
       }
     }
   //   //Remove all table rows (except header)

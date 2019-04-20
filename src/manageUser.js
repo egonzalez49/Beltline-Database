@@ -34,36 +34,52 @@ const options = {
 function sorting(value) {
   ipc.send("error-log", value);
   if (value === 1) {
-    if (sortU === 0) {
-      sortU = 1; //down arrow
-      arrowUser.className = "icon icon-down-dir"
-    } else {
+    if (sortU === -1) {
       sortU = 0;
-      arrowUser.className = "icon icon-up-dir"
+      arrowUser.className = "icon icon-up-dir";
+    } else if (sortU === 0) {
+      sortU = 1; //down arrow
+      arrowUser.className = "icon icon-down-dir";
+    } else if (sortU === 1) {
+      sortU = -1;
+      arrowUser.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 2) {
-    if (sortE === 0) {
-      sortE = 1;
-      arrowEmail.className = "icon icon-up-dir"
-    } else {
+    if (sortE === -1) {
       sortE = 0;
-      arrowEmail.className = "icon icon-down-dir"
+      arrowEmail.className = "icon icon-up-dir";
+    } else if (sortE === 0) {
+      sortE = 1; //down arrow
+      arrowEmail.className = "icon icon-down-dir";
+    } else if (sortE === 1) {
+      sortE = -1;
+      arrowEmail.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 3) {
-    if (sortT === 0) {
-      sortT = 1;
-      arrowType.className = "icon icon-up-dir"
-    } else {
+    if (sortT === -1) {
       sortT = 0;
-      arrowType.className = "icon icon-down-dir"
+      arrowType.className = "icon icon-up-dir";
+    } else if (sortT === 0) {
+      sortT = 1; //down arrow
+      arrowType.className = "icon icon-down-dir";
+    } else if (sortT === 1) {
+      sortT = -1;
+      arrowType.className = "icon icon-arrow-combo";
+      return;
     }
   } else if (value === 4) {
-    if (sortST === 0) {
-      sortST = 1;
-      arrowStatus.className = "icon icon-up-dir"
-    } else {
+    if (sortST === -1) {
       sortST = 0;
-      arrowStatus.className = "icon icon-down-dir"
+      arrowStatus.className = "icon icon-up-dir";
+    } else if (sortST === 0) {
+      sortST = 1; //down arrow
+      arrowStatus.className = "icon icon-down-dir";
+    } else if (sortST === 1) {
+      sortST = -1;
+      arrowStatus.className = "icon icon-arrow-combo";
+      return;
     }
   }
 
